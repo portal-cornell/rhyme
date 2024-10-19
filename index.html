@@ -48,21 +48,21 @@
 
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://kushal2000.github.io">Kushal Kedia*</a>,</span>
-            <span class="author-block">
-              <a href="https://portfolio-pdan101.vercel.app/">Prithwish Dan</a>,</span>
+              <a >Anonymous*</a>,</span>
+            <!-- <span class="author-block">
+              <a href="https://portfolio-pdan101.vercel.app/">Prithwish Dan</a>,</span> -->
             <!-- <span class="author-block"> 
                 <a href="https://portal.cs.cornell.edu/people/">Angela Chao</a>,</span>
             <span class="author-block">
                 <a href="https://portal.cs.cornell.edu/people/">Maximus Adrian Pace</a>,</span> -->
-            <span class="author-block">
-                <a href="https://www.sanjibanchoudhury.com/">Sanjiban Choudhury</a>            
+            <!-- <span class="author-block">
+                <a href="https://www.sanjibanchoudhury.com/">Sanjiban Choudhury</a>             -->
           </div>
 
           <!-- write Cornell Univerity in red next line -->
           <br>
           <!-- <hr style="height:0px; visibility:hidden;" /> -->
-          <img src="./static/images/cornell-university-logo.png" width="40%"></img>
+          <!-- <img src="./static/images/cornell-university-logo.png" width="40%"></img> -->
           <!-- <div class="is-size-3 publication-authors">
             <span class="author-block">Cornell University</span>
           </div> -->
@@ -90,7 +90,7 @@
                 </a>
               </span>
               <!-- twitter Link. -->
-              <span class="link-block">
+              <!-- <span class="link-block">
                 <a href="TODO"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
@@ -98,7 +98,7 @@
                   </span>
                   <span>Summary TODO</span>
                 </a>
-              </span>
+              </span> -->
             </div>
 
           </div>
@@ -120,14 +120,14 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="title is-3" >
-            Retrieval based algorithm that trains policies to imitate demonstrator actions under one-shot initiation
+            Retrieval based algorithm that trains policies to imitate demonstrator actions under one-shot imitation
           </h1>
           <br>
           <div class="publication-video">
-              <!-- add a link to youtube video using iframe -->
-
-              <p >Video TODO</p>
-              <!-- </video>  -->
+            <figure>
+              <img src="./resources/intro_fig.png" alt="Introduction Figure">
+              <figcaption>We introduce RHyME, a hierarchical framework that trains a robot policy to mimic a long-horizon video from a demonstrator that exhibits mismatched task execution. Inference Time (Left): Our robot policy translates a demonstrator video into actions to complete the same long-horizon tasks specified by the input. Train Time (Right): Given unpaired robot-demonstrator datasets, RHyME "imagines" a paired dataset by employing sequence-level similarity metrics which can be used for training the policy.</figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -195,7 +195,7 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <!-- <div class="publication-video"> -->
-          <p style="text-align: left;">
+          <p style="text-align: leVft;">
             Human demonstrations as prompts are a powerful way to program robots to do long-horizon manipulation tasks.
             However, translating these demonstrations into robot-executable actions presents significant challenges due to execution mismatches in movement styles and physical capabilities. Existing methods either depend on robot-demonstrator paired data, which is infeasible to scale, or rely too heavily on frame-level visual similarities that often break down in practice. To address these challenges, we propose RHyME, a novel framework that automatically aligns robot and demonstrator task executions using optimal transport costs. Given long-horizon robot demonstrations, RHyME synthesizes semantically equivalent demonstrator videos by retrieving and composing short-horizon demonstrator clips. This approach facilitates effective policy training without the need for paired data. We demonstrate that RHyME outperforms a range of baselines across cross-embodiment datasets, showing a 52% increase in task recall over prior cross-embodiment learning methods. 
           </p>
@@ -205,45 +205,59 @@
     </div>
     <br>
 
-    <div class="columns is-centered has-text-centered">
+    <!-- <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Training Overview</h2>
-        <!-- <div class="publication-video"> -->
-          <!-- align left -->
-           <!-- <p>image TODO</p> -->
-           <img src="./resources/fig_intro_new.png" style="width: 90%">
-          <br>
-          <br>
-          <!-- write three bullet points next using <ul> -->
 
           <li style="text-align: left;"> <b>Visual Encoder</b>: Maps robot and demonstrator videos to a shared embedding space </li>
           <li style="text-align: left;"> <b>RHyME</b>: Retrieve the nearest human snippet in embedding space to each robot video segment, then learn a policy based on combined human_video+robot_action and robot_video+robot_action pairs </li>
-            
-        <!-- </div> -->
       </div>
     </div>
-    <br>
+    <br> -->
 
-    <div class="columns is-centered has-text-centered">
+
+    <!-- <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Visual Encoder</h2>
+        <h2 class="title is-3">Evaluations</h2> -->
         <!-- <div class="publication-video"> -->
           <!-- align left -->
           
           
+          <!-- <img src="./static/images/vs_approach_pic.png"> -->
+
+          <!-- <li style="text-align: left;"><b>Training Data</b>: 
+            <br>
+            <img src="./static/images/train_data_1_place_holder.png" style="width: 45%; display: block; margin: 0 auto">
+            <br>
+            <img src="./static/images/train_data_2_place_holder.png" style="width: 45%; display: block; margin: 0 auto"> -->
+            <!-- Light -> Pot -> Cloth, Pot -> Drawer -> Cloth -->
+          <!-- </li>
+          <li style="text-align: left;"><b>Test Data</b>: 
+            <img src="./static/images/test_data_place_holder.png" style="width: 45%; display: block; margin: 0 auto">
+          </li> -->
+  
+        <!-- </div> -->
+      <!-- </div>
+    </div> -->
+
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Visual Encoder</h2>          
           
           <img src="./resources/fig_tsne.jpeg">
           <br>
           <br>
           <p style="text-align: left;">
-            The visual encoder aligns human demonstration encodings and robot demonstration encodings visually, temporally, and at a task level
+
+            We visualize the video embeddings via t-SNE and see that the embeddings are clustered together by task and temporally aligned. When the robot and human task embedding begin to diverge from each other, where other algorithms might fail at generlization, RHyME is able to correctly select the human snippet that is semantically equivalent to the robot view and and infer upon that. It selects the correct task albeit the minor divergence occurring. 
+            
+            The visual encoder used to measure and calculate the distances is optimized as follows: 
           </p>
 
           <li style="text-align: left;"> <b>Visual Alignment</b>: Cluster images based on image features using SwAV </li>
           <li style="text-align: left;"> <b>Temporal Alignment</b>: Drive images closer together in time together in embedding space and vice versa via Time Contrastive Loss. </li>
           <li style="text-align: left;"> <b>Task Alignment</b>: WHEN some paired robot-demonstrator data is available, align human and robot videos together in embedding space. </li>
             
-        <!-- </div> -->
       </div>
     </div>
     <br>
@@ -251,79 +265,114 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">RHyME</h2>
-        <!-- <div class="publication-video"> -->
-          <!-- align left -->
-          
-          
-          
-          <!-- <img src="./static/images/hmf.png"> -->
-          <!-- <img src="./static/images/HMF_video.gif"> -->
-          <img src="./static/images/algo_img.png" style="width: 60%">
+          <img src="./static/images/retrieval.png" style="width: 100%">
           <br>
           <br>
           <p style="text-align: left;">
-            Given a collected robot video with actions, we imagine a corresponding human video performing exactly the same task. This is done by retrieving the nearest snippet of human video in dataset in embedding space to each snippet of robot video. This creates a set of paired human-robot-trajectory triplet data.With the set of paired human-robot-trajectory triplet data, a policy is trained to predict action based on (state, human_demo_embedding, action) pairs and (state, robot_demo_embedding, action) pairs. 
+            Given a robot snippet recorded from camera, we retrieve a corresponding human video clip from the prompt performing exactly the same task. This is done by obtaining the nearest snippet of in embedding space to each snippet of robot video. This information is then used to prompt the policy along with the robot state to obtain a learned robot action. 
           </p>
             
-        <!-- </div> -->
       </div>
     </div>
-    <br>
+    <br> -->
 
+    <h2 class="title is-2 is-centered has-text-centered">Real World Evaluations</h2> 
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Evaluations</h2>
-        <!-- <div class="publication-video"> -->
-          <!-- align left -->
-          
-          
-          <!-- <img src="./static/images/vs_approach_pic.png"> -->
-
-          <li style="text-align: left;"><b>Training Data</b>: 
-            <br>
-            <img src="./static/images/train_data_1_place_holder.png" style="width: 45%; display: block; margin: 0 auto">
-            <br>
-            <img src="./static/images/train_data_2_place_holder.png" style="width: 45%; display: block; margin: 0 auto">
-            <!-- Light -> Pot -> Cloth, Pot -> Drawer -> Cloth -->
-          </li>
-          <li style="text-align: left;"><b>Test Data</b>: 
-            <img src="./static/images/test_data_place_holder.png" style="width: 45%; display: block; margin: 0 auto">
-          </li>
+      <div class="column is-four-fifths" >
+        <h2 class="title is-3">Light, Pot, Cloth</h2> 
+        <div class="video div" style="display: flex; justify-content: space-between;">
+          <div class="item item-steve" style="margin: 2%">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/human_abd.mov" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve" style="margin: 2%">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/robot_abd.mov" type="video/mp4">
+            </video>
+          </div>
+        </div>
   
-          <p> TODO: Lots of Videos </p>          
-          <!-- Create an interactive section below with three
-             buttons corresponding to playing of one of three gifs -->
-          
-          
         <!-- </div> -->
       </div>
     </div>
+
     <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Evaluation Results</h2>
-        <!-- <div class="publication-video"> -->
-          <!-- align left -->
-          
-          
-          
-          <!-- <img src="./static/images/hmf.png"> -->
-          <br>
-          <br>
-          <p style="text-align: left;">
-            TODO put in the table
-          </p>
-            
-        <!-- </div> -->
+      <div class="column is-four-fifths" >
+        <h2 class="title is-3">Pot, Drawer, Cloth</h2> 
+        <div class="video div" style="display: flex; justify-content: space-between;">
+          <div class="item item-steve" style="margin: 2%">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/human_bcd.mov" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve" style="margin: 2%">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/robot_bcd.mov" type="video/mp4">
+            </video>
+          </div>
+        </div>
+  
       </div>
     </div>
     
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths" >
+        <h2 class="title is-3">Light, Pot, Drawer</h2> 
+        <div class="video div" style="display: flex; justify-content: space-between;">
+          <div class="item item-steve" style="margin: 2%">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/human_abc.mov" type="video/mp4">
+            </video>
+          </div>
+          <div class="item item-steve" style="margin: 2%">
+            <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+              <source src="./static/videos/robot_abc.mov" type="video/mp4">
+            </video>
+          </div>
+        </div>
+  
+    
+      </div>
+    </div>
+    
+    <div class="columns is-centered has-text-centered">
+        
+      <div class="column is-four-fifths" >
+        <figure>
+          <img src="./static/images/realworld.png" alt="Real World Eval">
+          <figcaption>Realworld Results. (Left) Task Embeddings: We use t-SNE to visualize cross-embodiment latent embeddings from the human and robot completing three tasks. (Right) Task Completion: We compare the performance of RHyME with XSkill on seen and unseen long-horizon tasks specified by human prompt videos. Opaque segments indicate Task Completion rate, and augmented transparent bars indicate Task Attempt rate.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <h2 class="title is-2 is-centered has-text-centered">Simulation Evaluations</h2> 
+    <div class="columns is-centered has-text-centered">
+        
+      <div class="item item-steve" style="margin: 2%">
+        <video poster="" id="steve" autoplay controls muted loop playsinline width="80%">
+          <source src="./static/videos/simulation.mov" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+        
+      <div class="column is-four-fifths" >
+        <figure>
+          <img src="./resources/fig_success_new.png" alt="Introduction Figure">
+          <figcaption>We present results on three datasets (left). As the demonstrator's actions visually and physically deviate further from those of the robot, policies trained with our framework RHyME consistently outperforms XSkill measured by task recall and imprecision rates.</figcaption>
+        </figure>
+      </div>
+    </div>
+
 
     <!-- <br> -->
   </div>
 </section>
 
 
-<section class="section">
+<!-- <section class="section">
   <div class="container is-max-desktop">
 
     <div class="columns is-centered has-text-centered">
@@ -335,15 +384,15 @@
         </a>
     </div>
     <div class="paper-info">
-        <!-- <a href="https://openreview.net/forum?id=rxlokRzNWRq"><h3>ManiCast: Collaborative Manipulation with Cost-Aware Human Forecasting</h3></a>
-        <p>Kushal Kedia, Prithwish Dan, Atiksh Bhardwaj, Sanjiban Choudhury</p> -->
+        <a href="https://openreview.net/forum?id=rxlokRzNWRq"><h3>ManiCast: Collaborative Manipulation with Cost-Aware Human Forecasting</h3></a>
+        <p>Kushal Kedia, Prithwish Dan, Atiksh Bhardwaj, Sanjiban Choudhury</p>
         <h3 class="title is-4" style="text-align: center;">BibTex</h3>
 <pre style="overflow-x:hidden; text-wrap:wrap; white-space: pre-wrap;"><code>@misc{TODO
 }   
 </code></pre> 
     </div>
     </div>
-  <!-- <div class="container is-max-desktop content">
+  <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>@inproceedings{
     kedia2023manicast,
@@ -353,9 +402,9 @@
     year={2023},
     url={https://openreview.net/forum?id=rxlokRzNWRq}
 }</code></pre>
-  </div> -->
+  </div>
 </div>
-</section>
+</section> -->
 
 <br>
 
