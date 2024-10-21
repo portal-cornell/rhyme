@@ -21,7 +21,7 @@ body {
 }
 
 #interactive-section button {
-  background-color: #4CAF50; 
+  background-color: #4CAF50;
   border: 2px solid black;
   /* color: white; */
   padding: 8px 40px;
@@ -74,8 +74,7 @@ body {
   font-family: "Google Sans", sans-serif;
 }
 
-.publication-title {
-}
+.publication-title {}
 
 .publication-banner {
   max-height: parent;
@@ -120,7 +119,7 @@ body {
 }
 
 .publication-authors {
-  color: #b83a4b !important;
+  color: #000000 !important;
 }
 
 .conference-authors a {
@@ -142,8 +141,7 @@ body {
   display: inline-block;
 }
 
-.publication-banner img {
-}
+.publication-banner img {}
 
 .publication-authors {
   /*color: #4286f4;*/
@@ -153,7 +151,7 @@ body {
   position: relative;
   width: 100%;
   height: 0;
-  padding-bottom: 56.25%;
+  padding-bottom: 50%;
 
   overflow: hidden;
   border-radius: 10px !important;
@@ -167,8 +165,7 @@ body {
   height: 100%;
 }
 
-.publication-body img {
-}
+.publication-body img {}
 
 .results-carousel {
   overflow: hidden;
@@ -188,12 +185,13 @@ body {
 .results-carousel .item {
   margin: 5px;
   overflow: hidden;
-  border: 1px solid #bbb; 
+  border: 1px solid #bbb;
   border-radius: 10px;
   padding: 0;
-  font-size: 0; 
+  font-size: 0;
   /* width: 550px; */
 }
+
 /* .slider-item{
   width:500px !important;
 } */
@@ -216,8 +214,7 @@ body {
   border-radius: 5px;
 }
 
-.interpolation-video-column {
-}
+.interpolation-video-column {}
 
 .interpolation-panel .slider {
   margin: 0 !important;
@@ -230,6 +227,7 @@ body {
 #interpolation-image-wrapper {
   width: 100%;
 }
+
 #interpolation-image-wrapper img {
   border-radius: 5px;
 }
@@ -258,32 +256,38 @@ body {
 }
 
 /* .slider-item{ */
-  /* height: 60vh; */
-  /* width: 550px !important; */
+/* height: 60vh; */
+/* width: 550px !important; */
 /* } */
 
 .caption {
   text-align: center;
   font-size: 25px;
-  color: #333; /* Change to your desired text color */
-  margin-top: 0px; /* Adjust the margin as needed to create space for captions */
+  color: #333;
+  /* Change to your desired text color */
+  margin-top: 0px;
+  /* Adjust the margin as needed to create space for captions */
 }
 
 .content {
-  margin-bottom: 20px; /* Add space between the content and the strategies */
+  margin-bottom: 20px;
+  /* Add space between the content and the strategies */
 }
 
 .strategy {
-  display: flex; /* Create a flex container for the strategies */
-  justify-content: space-between; /* Align the strategies next to each other */
-  flex-wrap: wrap; /* Allow wrapping of strategy sections to the next row if needed */
+  display: flex;
+  /* Create a flex container for the strategies */
+  justify-content: space-between;
+  /* Align the strategies next to each other */
+  flex-wrap: wrap;
+  /* Allow wrapping of strategy sections to the next row if needed */
 }
 
 .strategy-section {
-  flex-basis: calc(
-    50% - 10px
-  ); /* Each strategy section takes half of the available width with a small gap in between */
-  margin-bottom: 10px; /* Add space between strategy sections */
+  flex-basis: calc(50% - 10px);
+  /* Each strategy section takes half of the available width with a small gap in between */
+  margin-bottom: 10px;
+  /* Add space between strategy sections */
 }
 
 .extra {
@@ -310,16 +314,27 @@ body {
 .layered-paper-big {
   /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
   box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.35),
-    /* The top layer shadow */ 5px 5px 0 0px #fff,
-    /* The second layer */ 5px 5px 1px 1px rgba(0, 0, 0, 0.35),
-    /* The second layer shadow */ 10px 10px 0 0px #fff,
-    /* The third layer */ 10px 10px 1px 1px rgba(0, 0, 0, 0.35),
-    /* The third layer shadow */ 15px 15px 0 0px #fff,
-    /* The fourth layer */ 15px 15px 1px 1px rgba(0, 0, 0, 0.35),
-    /* The fourth layer shadow */ 20px 20px 0 0px #fff,
-    /* The fifth layer */ 20px 20px 1px 1px rgba(0, 0, 0, 0.35),
-    /* The fifth layer shadow */ 25px 25px 0 0px #fff,
-    /* The fifth layer */ 25px 25px 1px 1px rgba(0, 0, 0, 0.35); /* The fifth layer shadow */
+    /* The top layer shadow */
+    5px 5px 0 0px #fff,
+    /* The second layer */
+    5px 5px 1px 1px rgba(0, 0, 0, 0.35),
+    /* The second layer shadow */
+    10px 10px 0 0px #fff,
+    /* The third layer */
+    10px 10px 1px 1px rgba(0, 0, 0, 0.35),
+    /* The third layer shadow */
+    15px 15px 0 0px #fff,
+    /* The fourth layer */
+    15px 15px 1px 1px rgba(0, 0, 0, 0.35),
+    /* The fourth layer shadow */
+    20px 20px 0 0px #fff,
+    /* The fifth layer */
+    20px 20px 1px 1px rgba(0, 0, 0, 0.35),
+    /* The fifth layer shadow */
+    25px 25px 0 0px #fff,
+    /* The fifth layer */
+    25px 25px 1px 1px rgba(0, 0, 0, 0.35);
+  /* The fifth layer shadow */
   margin-left: 10px;
   margin-right: 45px;
 }
