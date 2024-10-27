@@ -119,10 +119,55 @@
 
 
   <!-- Display a big video next -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <!-- <h1 class="title is-3">
+              Retrieval based algorithm that trains policies to imitate demonstrator actions under one-shot imitation
+            </h1>
+            <br> -->
+            <div class="publication-video" style="padding-bottom: 37.5%;">
+              <video poster="" id="main_video" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/mismatched_execution.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
+
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">Abstract</h2>
+            <!-- <div class="publication-video"> -->
+            <p style="text-align: justify;">
+              Human demonstrations as prompts are a powerful way to program robots to do long-horizon manipulation
+              tasks.
+              However, translating these demonstrations into robot-executable actions presents significant challenges
+              due
+              to execution mismatches in movement styles and physical capabilities. Existing methods either depend on
+              robot-demonstrator paired data, which is infeasible to scale, or rely too heavily on frame-level visual
+              similarities that often break down in practice. To address these challenges, we propose RHyME, a novel
+              framework that automatically aligns robot and demonstrator task executions using optimal transport costs.
+              Given long-horizon robot demonstrations, RHyME synthesizes semantically equivalent demonstrator videos by
+              retrieving and composing short-horizon demonstrator clips. This approach facilitates effective policy
+              training without the need for paired data. We demonstrate that RHyME outperforms a range of baselines
+              across
+              cross-embodiment datasets, showing a 52% increase in task recall over prior cross-embodiment learning
+              methods.
+            </p>
+
+            <!-- </div> -->
+          </div>
+        </div>
+
         <div class="columns is-centered">
           <div class="column has-text-centered">
             <!-- <h1 class="title is-3">
@@ -151,155 +196,9 @@
     </div>
   </section>
 
-  <!-- <section class="hero is-light is-small">
-  <div class="hero-body" has-text-centered>
-    <div class="container" >
-      <div class="column has-text-centered">
-        <h2 class="title is-3">MOSAIC enables flexibility, recoverability, and safety</h2>
-        <br>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/recoverability.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/safety.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flexibility.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/recoverability.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/safety.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/flexibility.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-      <br>
-      
-      </div>
-    </div>
-  </div>
-</section> -->
-
-
   <section class="section">
     <div class="container is-max-desktop">
       <!-- Dataset -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Abstract</h2>
-          <!-- <div class="publication-video"> -->
-          <p style="text-align: justify;">
-            Human demonstrations as prompts are a powerful way to program robots to do long-horizon manipulation tasks.
-            However, translating these demonstrations into robot-executable actions presents significant challenges due
-            to execution mismatches in movement styles and physical capabilities. Existing methods either depend on
-            robot-demonstrator paired data, which is infeasible to scale, or rely too heavily on frame-level visual
-            similarities that often break down in practice. To address these challenges, we propose RHyME, a novel
-            framework that automatically aligns robot and demonstrator task executions using optimal transport costs.
-            Given long-horizon robot demonstrations, RHyME synthesizes semantically equivalent demonstrator videos by
-            retrieving and composing short-horizon demonstrator clips. This approach facilitates effective policy
-            training without the need for paired data. We demonstrate that RHyME outperforms a range of baselines across
-            cross-embodiment datasets, showing a 52% increase in task recall over prior cross-embodiment learning
-            methods.
-          </p>
-
-          <!-- </div> -->
-        </div>
-      </div>
-      <br>
-
-      <!-- <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Training Overview</h2>
-
-          <li style="text-align: left;"> <b>Visual Encoder</b>: Maps robot and demonstrator videos to a shared embedding space </li>
-          <li style="text-align: left;"> <b>RHyME</b>: Retrieve the nearest human snippet in embedding space to each robot video segment, then learn a policy based on combined human_video+robot_action and robot_video+robot_action pairs </li>
-      </div>
-    </div>
-    <br> -->
-
-
-      <!-- <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Evaluations</h2> -->
-      <!-- <div class="publication-video"> -->
-      <!-- align left -->
-
-
-      <!-- <img src="./static/images/vs_approach_pic.png"> -->
-
-      <!-- <li style="text-align: left;"><b>Training Data</b>: 
-            <br>
-            <img src="./static/images/train_data_1_place_holder.png" style="width: 45%; display: block; margin: 0 auto">
-            <br>
-            <img src="./static/images/train_data_2_place_holder.png" style="width: 45%; display: block; margin: 0 auto"> -->
-      <!-- Light -> Pot -> Cloth, Pot -> Drawer -> Cloth -->
-      <!-- </li>
-          <li style="text-align: left;"><b>Test Data</b>: 
-            <img src="./static/images/test_data_place_holder.png" style="width: 45%; display: block; margin: 0 auto">
-          </li> -->
-
-      <!-- </div> -->
-      <!-- </div>
-    </div> -->
-
-      <!-- <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Visual Encoder</h2>          
-          
-          <img src="./resources/fig_tsne.jpeg">
-          <br>
-          <br>
-          <p style="text-align: left;">
-
-            We visualize the video embeddings via t-SNE and see that the embeddings are clustered together by task and temporally aligned. When the robot and human task embedding begin to diverge from each other, where other algorithms might fail at generlization, RHyME is able to correctly select the human snippet that is semantically equivalent to the robot view and and infer upon that. It selects the correct task albeit the minor divergence occurring. 
-            
-            The visual encoder used to measure and calculate the distances is optimized as follows: 
-          </p>
-
-          <li style="text-align: left;"> <b>Visual Alignment</b>: Cluster images based on image features using SwAV </li>
-          <li style="text-align: left;"> <b>Temporal Alignment</b>: Drive images closer together in time together in embedding space and vice versa via Time Contrastive Loss. </li>
-          <li style="text-align: left;"> <b>Task Alignment</b>: WHEN some paired robot-demonstrator data is available, align human and robot videos together in embedding space. </li>
-            
-      </div>
-    </div>
-    <br>
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">RHyME</h2>
-          <img src="./static/images/retrieval.png" style="width: 100%">
-          <br>
-          <br>
-          <p style="text-align: left;">
-            Given a robot snippet recorded from camera, we retrieve a corresponding human video clip from the prompt performing exactly the same task. This is done by obtaining the nearest snippet of in embedding space to each snippet of robot video. This information is then used to prompt the policy along with the robot state to obtain a learned robot action. 
-          </p>
-            
-      </div>
-    </div>
-    <br> -->
 
       <h2 class="title is-2 is-centered has-text-centered">Real World Evaluations
       </h2>
@@ -309,12 +208,12 @@
           <div class="video div" style="display: flex; justify-content: space-between;">
             <div class="item item-steve" style="margin: 2%">
               <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/human_abd.mov" type="video/mp4">
+                <source src="./static/videos/human_abd_annotated.mp4" type="video/mp4">
               </video>
             </div>
             <div class="item item-steve" style="margin: 2%">
               <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/robot_abd.mov" type="video/mp4">
+                <source src="./static/videos/robot_abd_annotated.mp4" type="video/mp4">
               </video>
             </div>
           </div>
@@ -329,12 +228,12 @@
           <div class="video div" style="display: flex; justify-content: space-between;">
             <div class="item item-steve" style="margin: 2%">
               <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/human_bcd.mov" type="video/mp4">
+                <source src="./static/videos/human_bcd_annotated.mp4" type="video/mp4">
               </video>
             </div>
             <div class="item item-steve" style="margin: 2%">
               <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/robot_bcd.mov" type="video/mp4">
+                <source src="./static/videos/robot_bcd_annotated.mp4" type="video/mp4">
               </video>
             </div>
           </div>
@@ -349,12 +248,12 @@
             <div class="video div" style="display: flex; justify-content: space-between;">
               <div class="item item-steve" style="margin: 2%">
                 <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                  <source src="./static/videos/human_abc.mov" type="video/mp4">
+                  <source src="./static/videos/human_abc_annotated.mp4" type="video/mp4">
                 </video>
               </div>
               <div class="item item-steve" style="margin: 2%">
                 <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                  <source src="./static/videos/robot_abc.mov" type="video/mp4">
+                  <source src="./static/videos/robot_abc_annotated.mp4" type="video/mp4">
                 </video>
               </div>
             </div>
@@ -365,7 +264,7 @@
 
       <div class="columns is-centered has-text-centered">
 
-        <div class="column is-four-fifths">
+        <div>
           <figure>
             <img src="./static/images/realworld.png" alt="Real World Eval">
             <figcaption style="text-align: justify">Realworld Results. (Left) Task Embeddings: We use t-SNE to visualize
@@ -373,6 +272,7 @@
               embeddings from the human and robot completing three tasks. (Right) Task Completion: We compare the
               performance of RHyME with XSkill on seen and unseen long-horizon tasks specified by human prompt videos.
               Opaque segments indicate Task Completion rate, and augmented transparent bars indicate Task Attempt rate.
+              <b> Our method RHyME outperforms XSkill in seen and unseen tasks in the real world.</b>
             </figcaption>
           </figure>
         </div>
@@ -393,10 +293,14 @@
         <div class="column is-four-fifths">
           <figure>
             <img src="./resources/fig_success_new.png" alt="Introduction Figure">
-            <figcaption style="text-align: justify">We present results on three datasets (left). As the demonstrator's
-              actions visually and
-              physically deviate further from those of the robot, policies trained with our framework RHyME consistently
-              outperforms XSkill measured by task recall and imprecision rates.</figcaption>
+            <figcaption style="text-align: justify">We present results on three datasets.
+              For Tasks Recall %, a <i>higher</i> percentage indicates better performance, whereas for Tasks Imprecision
+              %, a
+              <i>lower</i> percentage indicates better performance.
+              Importantly, as the demonstrator's actions visually and physically deviate further from those of the
+              robot, <b>policies trained with our framework RHyME consistently outperform XSkill in a simulation
+                setting.</b>
+            </figcaption>
           </figure>
         </div>
       </div>
