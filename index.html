@@ -298,22 +298,34 @@
       </div>
 
       <div class="columns is-centered has-text-centered">
-
         <div class="column is-four-fifths">
-          <figure>
-            <img src="./resources/fig_success_less.png" alt="Introduction Figure">
-            <figcaption style="text-align: justify">We present results on three datasets.
-              As the demonstrator's actions visually and physically deviate further from those of the
-              robot, <b>policies trained with our framework RHyME consistently outperform XSkill in a simulation
-                setting.</b>
-            </figcaption>
-          </figure>
+          <p style="text-align: justify">We present results on three datasets. As the demonstrator's
+            actions visually and physically deviate further from those of the robot, <b>policies trained with our
+              framework RHyME consistently outperform XSkill in a simulation setting.</b>
+          </p>
+          <div class="column is-four-fifths">
+            <figure>
+              <img src="./resources/Recall.png" alt="Introduction Figure">
+              <figcaption style="text-align: justify">We measure Task Recall, which assesses proportion of successfully
+                completed tasks out of all attempted tasks.
+                As the execution becomes increasingly mismatched, RHyME is able to maintain relatively higher rates of
+                task recall compared to XSkill.
+              </figcaption>
+            </figure>
+            <figure>
+              <img src="./resources/Imprecision.png" alt="Introduction Figure">
+              <figcaption style="text-align: justify">We also measure Task Imprecision, which reports the percentage of
+                incorrect tasks the robot attempts, i.e. those that were not specified by the human prompt.
+                When attempting the hard scenario with mismatch in appearance, execution, and manual dexterity, RHyME
+                achieves significantly lower imprecision rates than XSkill.
+              </figcaption>
+            </figure>
+          </div>
         </div>
+
+
+        <!-- <br> -->
       </div>
-
-
-      <!-- <br> -->
-    </div>
   </section>
 
 
