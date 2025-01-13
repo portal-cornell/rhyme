@@ -1,0 +1,13 @@
+hydra:
+  output_subdir: null
+  
+base_dev_dir: '/share/portal/pd337'
+
+dataset_dir: '${base_dev_dir}/xskill/datasets/kitchen/small_kitchen'
+start_eps: 0
+end_eps: 4
+res: 1024
+embodiment: 'none'
+
+store_video: True
+video_path: '${base_dev_dir}/xskill/datasets/kitchen_dataset/${embodiment}'

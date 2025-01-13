@@ -1,0 +1,22 @@
+base_dev_dir: '/share/portal/pd337'
+
+resize_shape: [124,124]
+data_path: ${base_dev_dir}/xskill/datasets/kitchen_dataset
+pretrain_model_name: 'NO_PAIRING_TWOHANDS'
+exp_path: '${base_dev_dir}/xskill/experiment/pretrain/${pretrain_model_name}'
+
+ckpt: 40
+cross_embodiment_segments: 'twohands_segments_paired_sample'
+device: 'cuda:0'
+verbose: True
+
+frame_sampler:
+  _target_: xskill.dataset.frame_samplers.UniformDownSampleSampler
+  offset: 0
+  num_frames: 30
+  downsample_ratio: 1
+
+num_chops: 2
+ot_lookup: False
+tcc_lookup: False
+nearest_neighbor_data_dirs: ${exp_path}/${cross_embodiment_segments}_l2_${num_chops}/ckpt_${ckpt} 

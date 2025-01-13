@@ -1,0 +1,20 @@
+base_dev_dir: '/share/portal/pd337'
+
+resize_shape: [124,124]
+data_path: ${base_dev_dir}/xskill/datasets/kitchen_dataset
+task_json_path: ${data_path}/task_completions.json
+exp_path: '${base_dev_dir}/xskill/experiment/pretrain/none_simultaneous_new'
+human_type: 'none_simultaneous'
+ckpt: 39
+device: 'cuda:0'
+
+correct_thresholds: 10
+save_clips: True
+clip_path: '${exp_path}/gifs'
+
+is_lookup: False
+nearest_neighbor_data_dirs: ${exp_path}/${human_type}_l2/ckpt_${ckpt} 
+paired_proto_dirs: ${exp_path}/${human_type}_encode_protos/ckpt_${ckpt} 
+save_lookups: False
+
+
