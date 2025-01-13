@@ -1,8 +1,8 @@
 # One-Shot Imitation under Mismatched Execution
 
-<sup>1*</sup>[Kushal Kedia](https://kushal2000.github.io/),  <sup>1*</sup>[Prithwish Dan](https://pdan101.github.io/), Angela Chao, Maximus A. Pace, <sup>1</sup>[Sanjiban Choudhury](https://sanjibanc.github.io/)
+<sup>*</sup>[Kushal Kedia](https://kushal2000.github.io/),  <sup>*</sup>[Prithwish Dan](https://pdan101.github.io/), Angela Chao, Maximus A. Pace, [Sanjiban Choudhury](https://sanjibanc.github.io/)
 
-<sup>1</sup>Cornell University, <sup>*</sup>Equal Contribution
+<sup></sup>Cornell University, <sup>*</sup>Equal Contribution
 
 [Project Page](https://portal-cornell.github.io/rhyme/)|[arxiv](https://arxiv.org/pdf/2409.06615)
 
