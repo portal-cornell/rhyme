@@ -1,6 +1,6 @@
 # One-Shot Imitation under Mismatched Execution
 
-<sup>*</sup>[Kushal Kedia](https://kushal2000.github.io/),  <sup>*</sup>[Prithwish Dan](https://pdan101.github.io/), Angela Chao, Maximus A. Pace, [Sanjiban Choudhury](https://sanjibanc.github.io/)
+*[Kushal Kedia](https://kushal2000.github.io/),  *[Prithwish Dan](https://pdan101.github.io/), Angela Chao, Maximus A. Pace, [Sanjiban Choudhury](https://sanjibanc.github.io/)
 
 <sup></sup>Cornell University, <sup>*</sup>Equal Contribution
 
