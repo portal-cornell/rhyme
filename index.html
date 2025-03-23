@@ -2,30 +2,36 @@
 <html>
 
 <head>
+  <!-- Meta tags for SEO and viewport configuration -->
   <meta charset="utf-8">
   <meta name="description" content="One-Shot Imitation under Mismatched Execution">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>One-Shot Imitation under Mismatched Execution</title>
-  <!-- Google tag (gtag.js) -->
+  
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QR88D4MJ0H"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-QR88D4MJ0H');
   </script>
 
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+  
+  <!-- Favicon -->
   <link rel="icon" href="./static/images/icon.jpg">
 
+  <!-- Scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
@@ -34,15 +40,24 @@
 </head>
 
 <body>
-
-  <section class="hero" style="margin-top: 2em;">
-    <div class="hero-body">
+  <!-- ============================== -->
+  <!-- Header / Title Section         -->
+  <!-- ============================== -->
+  <section class="hero" style="margin-top: 1.5em; margin-bottom: 1em;">
+    <div class="hero-body" style="padding-bottom: 1rem;">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">One-Shot Imitation under<br>Mismatched Execution</h1>
+            <!-- Paper title -->
+            <h1 class="title is-1 publication-title" style="margin-bottom: 0.5rem;">One-Shot Imitation under<br>Mismatched Execution</h1>
+            
+            <!-- Conference information -->
+            <p class="subtitle is-3" style="margin-bottom: 1.75em; color: #B31B1B; font-weight: 600; font-size: 1.7rem;">
+              ICRA 2025
+            </p>
 
-            <div class="is-size-5 publication-authors">
+            <!-- Author list with links to personal websites -->
+            <div class="is-size-5 publication-authors" style="margin-bottom: 1.5em;">
               <span class="author-block">
                 <a href="https://kushal2000.github.io">Kushal Kedia*</a>,</span>
               <span class="author-block">
@@ -53,19 +68,19 @@
                 <a href="https://maximuspace.com">Maximus Adrian Pace</a>,</span>
               <span class="author-block">
                 <a href="https://www.sanjibanchoudhury.com/">Sanjiban Choudhury</a>
+              </span>
             </div>
 
-            <!-- write Cornell Univerity in red next line -->
-            <br>
-            <img src="./static/images/cornell-university-logo.png" width="40%"></img>
+            <!-- Institution branding -->
+            <img src="./static/images/cornell-university-logo.png" width="40%" alt="Cornell University Logo" style="margin-bottom: 1.5em;">
             <div class="is-size-3 publication-authors">
-              <!-- <span class="author-block">Cornell University</span> -->
+              <!-- Placeholder for additional institution text if needed -->
             </div>
 
+            <!-- Publication links section (paper, arXiv, code) -->
             <div class="column has-text-centered">
-
               <div class="publication-links">
-                <!-- PDF Link. -->
+                <!-- PDF Link -->
                 <span class="link-block">
                   <a href="https://arxiv.org/pdf/2409.06615" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
@@ -74,6 +89,8 @@
                     <span>Paper</span>
                   </a>
                 </span>
+                
+                <!-- arXiv Link -->
                 <span class="link-block">
                   <a href="https://arxiv.org/abs/2409.06615" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
@@ -82,27 +99,28 @@
                     <span>arXiv</span>
                   </a>
                 </span>
+                
+                <!-- GitHub Code Link -->
                 <span class="link-block">
                   <a href="https://github.com/portal-cornell/rhyme"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fa-brands fa-github"></i>
                     </span>
-                    <span>Code (Coming soon)</span>
+                    <span>Code</span>
                   </a>
                 </span>
-                <!-- twitter Link. -->
+                
+                <!-- Commented out Twitter Link - for future use if needed -->
                 <!-- <span class="link-block">
-                <a href="TODO"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
+                  <a href="TODO" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
                       <i class="fab fa-x-twitter"></i>
-                  </span>
-                  <span>Summary TODO</span>
-                </a>
-              </span> -->
+                    </span>
+                    <span>Summary TODO</span>
+                  </a>
+                </span> -->
               </div>
-
             </div>
           </div>
         </div>
@@ -110,16 +128,15 @@
     </div>
   </section>
 
-  <!-- reduce line spacing below -->
-
-
-
-  <!-- Display a big video next -->
+  <!-- ============================== -->
+  <!-- Main Demo Video Section        -->
+  <!-- ============================== -->
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
+            <h1 class="title is-3">RHyME enables one-shot imitation from human videos with mismatches in embodiment and execution</h1>
             <div class="publication-video" style="padding-bottom: 37.5%;">
               <video poster="" id="main_video" autoplay controls muted loop playsinline height="100%">
                 <source src="./static/videos/Mismatched Execution.mov" type="video/mp4">
@@ -131,57 +148,51 @@
     </div>
   </section>
 
-  <section class="hero">
-    <div class="hero-body">
+  <!-- ============================== -->
+  <!-- Abstract Section               -->
+  <!-- ============================== -->
+  <section class="hero" style="background-color: #f5f5f5; padding-top: 1em; padding-bottom: 1em; margin-bottom: 1.5em;">
+    <div class="hero-body" style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
       <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
-            <h2 class="title is-3">Abstract</h2>
-            <!-- <div class="publication-video"> -->
-            <p style="text-align: justify;">
+            <h2 class="title is-2 is-centered has-text-centered" style="margin-bottom: 0.75rem;">Abstract</h2>
+            <p style="text-align: justify; margin-bottom: 0.5rem;">
               Human demonstrations as prompts are a powerful way to program robots to do long-horizon manipulation
-              tasks.
-              However, translating these demonstrations into robot-executable actions presents significant challenges
-              due
-              to execution mismatches in movement styles and physical capabilities. Existing methods either depend on
+              tasks. However, translating these demonstrations into robot-executable actions presents significant challenges
+              due to execution mismatches in movement styles and physical capabilities. Existing methods either depend on
               robot-demonstrator paired data, which is infeasible to scale, or rely too heavily on frame-level visual
               similarities that often break down in practice. To address these challenges, we propose RHyME, a novel
               framework that automatically aligns robot and demonstrator task executions using optimal transport costs.
               Given long-horizon robot demonstrations, RHyME synthesizes semantically equivalent demonstrator videos by
               retrieving and composing short-horizon demonstrator clips. This approach facilitates effective policy
               training without the need for paired data. We demonstrate that RHyME outperforms a range of baselines
-              across
-              cross-embodiment datasets, showing a 52% increase in task recall over prior cross-embodiment learning
+              across cross-embodiment datasets, showing a 52% increase in task recall over prior cross-embodiment learning
               methods.
             </p>
-
-            <!-- </div> -->
           </div>
         </div>
-        <br>
-        <h2 class="title is-2 is-centered has-text-centered">Approach Overview
-        </h2>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ============================== -->
+  <!-- Approach Overview Section      -->
+  <!-- ============================== -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-2 is-centered has-text-centered">Approach Overview</h2>
 
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <!-- <h1 class="title is-3">
-              Retrieval based algorithm that trains policies to imitate demonstrator actions under one-shot imitation
-            </h1>
-            <br> -->
             <div class="publication-video">
               <figure>
                 <img src="./resources/intro_fig.png" alt="Introduction Figure">
-                <!-- <figcaption>We introduce RHyME, a hierarchical framework that trains a robot policy to mimic a
-                  long-horizon video from a demonstrator that exhibits mismatched task execution. Inference Time (Left):
-                  Our robot policy translates a demonstrator video into actions to complete the same long-horizon tasks
-                  specified by the input. Train Time (Right): Given unpaired robot-demonstrator datasets, RHyME
-                  "imagines" a paired dataset by employing sequence-level similarity metrics which can be used for
-                  training the policy.</figcaption> -->
                 <figcaption style="text-align: justify;">We introduce RHyME, a hierarchical framework that trains a
-                  robot policy to mimic a
-                  long-horizon video from a demonstrator that exhibits mismatched task execution. Our policy translates
-                  a demonstrator video into actions to complete the same task on a robot by "imagining" a paired
-                  dataset.</figcaption>
+                  robot policy to mimic a long-horizon video from a demonstrator that exhibits mismatched task execution. 
+                  Our policy translates a demonstrator video into actions to complete the same task on a robot by "imagining" 
+                  a paired dataset.</figcaption>
               </figure>
             </div>
           </div>
@@ -190,228 +201,446 @@
     </div>
   </section>
 
+  <!-- ============================== -->
+  <!-- Real World Evaluations Section -->
+  <!-- ============================== -->
   <section class="section">
     <div class="container is-max-desktop">
-      <!-- Dataset -->
+      <h2 class="title is-2 is-centered has-text-centered">Real World Evaluations</h2>
 
-      <h2 class="title is-2 is-centered has-text-centered">Real World Evaluations
-      </h2>
-
+      <!-- Approach explanation and comparison -->
       <div class="is-centered has-text-centered">
-        <p style="text-align: justify; padding-bottom: 1em;">
-          We compare our approach to the baseline of <a href="https://xskill.cs.columbia.edu">XSkill</a>, which
-          employs clustering to group similar visual features for aligning human and robot video representations.
-          <!-- To overcome this, we redefine the visual imitation problem as a retrieval task during training.
-          We match robot videos to the most similar human video segments from an unpaired play dataset, allowing the
-          model to create synthetic demonstration videos for training. -->
+        <p style="text-align: justify; padding-bottom: 1.5em;">
+          We compare RHyME to <a href="https://xskill.cs.columbia.edu">XSkill</a> for one-shot robot imitation from human videos. 
+          <b>The key difference:</b> XSkill trains policies using only robot data and struggles with execution mismatches, 
+          while <b>RHyME</b> creates synthetic paired human-robot data by pairing robot videos with similar human segments from unpaired data. 
+          Our approach better handles differences in embodiment and execution style, resulting in more accurate task imitation as shown in the videos below.
         </p>
-        <p style="text-align: justify; padding-bottom: 1em;">
-          RHyME instead uses <i>retrieval</i> to match robot videos to the most similar human video segments from
-          unpaired play data,
-          creating a synthetic dataset. This allows the model to handle significant differences in how tasks are
-          performed.</p>
       </div>
 
-      <!-- <div class="columns is-centered has-text-centered">
-        <div class="column">
-          <h3 class="title is-4" style="margin-bottom: 0px !important;">Tasks: turn on light, move pot, drop cloth</h3>
-          <div class="video div" style="display: flex; justify-content: space-between;">
-            <div class="item item-steve" style="margin: 2%">
-              <h3 class="title is-5" style="margin-bottom: 0px !important;">Human Demo</h3>
-              <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/human_abd_annotated.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="item item-steve" style="margin: 2%">
-              <h3 class="title is-5" style="margin-bottom: 0px !important;">RHyME</h3>
-              <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/robot_abd_annotated.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="item item-steve" style="margin: 2%">
-              <h3 class="title is-5" style="margin-bottom: 0px !important;">XSkill</h3>
-              <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/xskill_abd_annotated.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
+      <!-- Evaluation scenario 1: move pot, close drawer, drop cloth -->
       <div class="columns is-centered has-text-centered">
         <div class="column">
-          <h3 class="title is-4" style="margin-bottom: 0px !important;">Tasks: move pot, close drawer, drop cloth</h3>
-          <div class="video div" style="display: flex; justify-content: space-between;">
-            <div class="item item-steve" style="margin: 2%">
-              <h3 class="title is-5" style="margin-bottom: 0px !important;">Human Demo</h3>
-              <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/Human BCD Square.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="item item-steve" style="margin: 2%">
-              <h3 class="title is-5" style="margin-bottom: 0px !important;">RHyME</h3>
-              <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/RHyME BCD Square.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="item item-steve" style="margin: 2%">
-              <h3 class="title is-5" style="margin-bottom: 0px !important;">XSkill</h3>
-              <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/XSkill BCD Square.mp4" type="video/mp4">
-              </video>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="columns is-centered has-text-centered">
-        <div class="column">
-          <h3 class="title is-4" style="margin-bottom: 0px !important;">Tasks: turn on light, move pot, close drawer
+          <!-- Enhanced task sequence title with better styling and more visual arrows -->
+          <h3 class="title is-4" style="background-color: #f7f7f7; padding: 0.6em; border-radius: 6px; display: inline-block; margin-bottom: 1em !important;">
+            <span style="font-weight: 500;">Task Sequence #1:</span> 
+            <span style="font-weight: 600; color: #333;">Move pot</span> 
+            <span style="color: #B31B1B; font-weight: 600; margin: 0 0.4em;">→</span> 
+            <span style="font-weight: 600; color: #333;">Close drawer</span> 
+            <span style="color: #B31B1B; font-weight: 600; margin: 0 0.4em;">→</span> 
+            <span style="font-weight: 600; color: #333;">Drop cloth</span>
           </h3>
-          <div class="video div" style="display: flex; justify-content: space-between;">
-            <div class="item item-steve" style="margin: 2%">
-              <h3 class="title is-5" style="margin-bottom: 0px !important;">Human Demo</h3>
-              <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/Human ABC Square.mp4" type="video/mp4">
-              </video>
+          
+          <!-- Video container with clearer input-output designation -->
+          <div id="block1-container" style="display: flex; flex-direction: row; align-items: stretch; margin-bottom: 0;">
+            <!-- Input section (Human Demo) -->
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding-right: 0;">
+              <h3 class="title is-5" style="margin-bottom: 0.5em !important; width: 100%;">Human Demonstration<br>(Input)</h3>
+              <div style="width: 100%; position: relative;">
+                <video poster="" id="human-video-1" autoplay muted controls playsinline height="100%" style="width: 100%;">
+                  <source src="./static/videos/Human BCD Square.mp4" type="video/mp4">
+                </video>
+              </div>
             </div>
-            <div class="item item-steve" style="margin: 2%">
-              <h3 class="title is-5" style="margin-bottom: 0px !important;">RHyME</h3>
-              <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/RHyME ABC Square.mp4" type="video/mp4">
-              </video>
+            
+            <!-- Vertical separator -->
+            <div style="display: flex; flex-direction: column; justify-content: center; margin: 0 20px; padding-top: 1.5em;">
+              <div style="width: 3px; background-color: #999; height: 100%; margin: 0 auto;"></div>
             </div>
-            <div class="item item-steve" style="margin: 2%">
-              <h3 class="title is-5" style="margin-bottom: 0px !important;">XSkill</h3>
-              <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/XSkill ABC Square.mp4" type="video/mp4">
-              </video>
+            
+            <!-- Output section (Robot Executions) -->
+            <div style="flex: 2; display: flex; align-items: stretch;">
+              <div style="flex: 1; margin-right: 10px; display: flex; flex-direction: column;">
+                <h3 class="title is-5" style="margin-bottom: 0.5em !important;">RHyME Execution<br>(Our Method)</h3>
+                <div style="flex-grow: 1; position: relative;">
+                  <video poster="" id="rhyme-video-1" autoplay muted controls playsinline style="width: 100%; height: 100%;">
+                    <source src="./static/videos/RHyME BCD Square.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              
+              <div style="flex: 1; display: flex; flex-direction: column;">
+                <h3 class="title is-5" style="margin-bottom: 0.5em !important;">XSkill Execution<br>(Baseline)</h3>
+                <div style="flex-grow: 1; position: relative;">
+                  <video poster="" id="xskill-video-1" autoplay muted controls playsinline style="width: 100%; height: 100%;">
+                    <source src="./static/videos/XSkill BCD Square.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
             </div>
           </div>
-
-
         </div>
       </div>
 
-      <div class="column is-centered has-text-centered">
-        <h2 class="title is-2 is-centered has-text-centered">Evaluating Across Levels of Mismatch
-        </h2>
+      <!-- Key results summary for first video -->
+      <div class="is-centered has-text-centered" style="margin-top: -0.5em; margin-bottom: 1.5em;">
+        <p style="text-align: justify; padding: 1em; border-left: 4px solid #B31B1B; background-color: #f9f9f9;">
+          <b>Key Observation:</b> As demonstrated in the videos above, when conditioned on the same human demonstration (input), 
+          RHyME's policy enables the robot to more accurately complete the sequence of tasks.
+        </p>
+      </div>
 
-        <div>
+      <!-- Evaluation scenario 2: turn on light, move pot, close drawer -->
+      <div class="columns is-centered has-text-centered" style="margin-top: 2em;">
+        <div class="column">
+          
+          <!-- Enhanced task sequence title with better styling and more visual arrows -->
+          <h3 class="title is-4" style="background-color: #f7f7f7; padding: 0.6em; border-radius: 6px; display: inline-block; margin-bottom: 1em !important;">
+            <span style="font-weight: 500;">Task Sequence #2:</span> 
+            <span style="font-weight: 600; color: #333;">Turn on light</span> 
+            <span style="color: #B31B1B; font-weight: 600; margin: 0 0.4em;">→</span> 
+            <span style="font-weight: 600; color: #333;">Move pot</span> 
+            <span style="color: #B31B1B; font-weight: 600; margin: 0 0.4em;">→</span> 
+            <span style="font-weight: 600; color: #333;">Close drawer</span>
+          </h3>
+          
+          <!-- Video container with clearer input-output designation -->
+          <div id="block2-container" style="display: flex; flex-direction: row; align-items: stretch; margin-bottom: 0;">
+            <!-- Input section (Human Demo) -->
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding-right: 0;">
+              <h3 class="title is-5" style="margin-bottom: 0.5em !important; width: 100%;">Human Demonstration<br>(Input)</h3>
+              <div style="width: 100%; position: relative;">
+                <video poster="" id="human-video-2" controls playsinline height="100%" style="width: 100%;">
+                  <source src="./static/videos/Human ABC Square.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            
+            <!-- Vertical separator -->
+            <div style="display: flex; flex-direction: column; justify-content: center; margin: 0 20px; padding-top: 1.5em;">
+              <div style="width: 3px; background-color: #999; height: 100%; margin: 0 auto;"></div>
+            </div>
+            
+            <!-- Output section (Robot Executions) -->
+            <div style="flex: 2; display: flex; align-items: stretch;">
+              <div style="flex: 1; margin-right: 10px; display: flex; flex-direction: column;">
+                <h3 class="title is-5" style="margin-bottom: 0.5em !important;">RHyME Execution<br>(Our Method)</h3>
+                <div style="flex-grow: 1; position: relative;">
+                  <video poster="" id="rhyme-video-2" controls playsinline style="width: 100%; height: 100%;">
+                    <source src="./static/videos/RHyME ABC Square.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              
+              <div style="flex: 1; display: flex; flex-direction: column;">
+                <h3 class="title is-5" style="margin-bottom: 0.5em !important;">XSkill Execution<br>(Baseline)</h3>
+                <div style="flex-grow: 1; position: relative;">
+                  <video poster="" id="xskill-video-2" controls playsinline style="width: 100%; height: 100%;">
+                    <source src="./static/videos/XSkill ABC Square.mp4" type="video/mp4">
+                  </video>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key results summary for second video -->
+      <div class="is-centered has-text-centered" style="margin-top: -0.5em; margin-bottom: 1.5em;">
+        <p style="text-align: justify; padding: 1em; border-left: 4px solid #B31B1B; background-color: #f9f9f9;">
+          <b>Key Observation:</b> XSkill attempts tasks that weren't specified in the human demonstration, showing that it lacks precision in following the intended sequence. RHyME maintains higher fidelity to the exact tasks demonstrated by the human.
+        </p>
+      </div>
+
+      <!-- Add JavaScript for video coordination -->
+      <script>
+// Video coordination script - creates a sequential playback loop
+document.addEventListener('DOMContentLoaded', function() {
+  // Get video elements for first block
+  const humanVideo1 = document.getElementById('human-video-1');
+  const rhymeVideo1 = document.getElementById('rhyme-video-1');
+  const xskillVideo1 = document.getElementById('xskill-video-1');
+  
+  // Get video elements for second block
+  const humanVideo2 = document.getElementById('human-video-2');
+  const rhymeVideo2 = document.getElementById('rhyme-video-2');
+  const xskillVideo2 = document.getElementById('xskill-video-2');
+  
+  // Create arrays for each video block
+  const block1Videos = [humanVideo1, rhymeVideo1, xskillVideo1];
+  const block2Videos = [humanVideo2, rhymeVideo2, xskillVideo2];
+  const allVideos = [...block1Videos, ...block2Videos];
+  
+  // Initialize all videos
+  allVideos.forEach(video => {
+    // Set double speed
+    video.playbackRate = 2.0;
+    // Ensure videos are muted to allow autoplay
+    video.muted = true;
+    // Reset all videos
+    video.currentTime = 0;
+    // Make sure controls are visible
+    video.controls = true;
+  });
+  
+  // Setup independent block 1 sequence playback
+  function setupBlock1Sequence() {
+    // Reset all block 1 videos
+    humanVideo1.currentTime = 0;
+    rhymeVideo1.currentTime = 0;
+    xskillVideo1.currentTime = 0;
+    
+    // Set initial opacity - all videos dimmed at start
+    humanVideo1.style.opacity = '0.3';
+    rhymeVideo1.style.opacity = '0.3';
+    xskillVideo1.style.opacity = '0.3';
+    
+    // Pause all videos initially
+    humanVideo1.pause();
+    rhymeVideo1.pause();
+    xskillVideo1.pause();
+    
+    // Wait a couple seconds then start the human video
+    setTimeout(function() {
+      // Now set human to full opacity and play
+      humanVideo1.style.opacity = '1';
+      humanVideo1.play().catch(e => console.error("Error playing human video 1:", e));
+      
+      // When human video ends, play robot videos at full opacity
+      humanVideo1.onended = function() {
+        // Set opacity
+        humanVideo1.style.opacity = '0.6'; // Dim human video when done
+        rhymeVideo1.style.opacity = '1';   // Show robot videos at full opacity
+        xskillVideo1.style.opacity = '1';
+        
+        // Play robot videos
+        rhymeVideo1.currentTime = 0;
+        xskillVideo1.currentTime = 0;
+        rhymeVideo1.play().catch(e => console.error("Error playing rhyme video 1:", e));
+        xskillVideo1.play().catch(e => console.error("Error playing xskill video 1:", e));
+        
+        // When robot videos end, start the sequence again
+        const checkRobotVideosEnded = function() {
+          if ((rhymeVideo1.ended || rhymeVideo1.paused) && 
+              (xskillVideo1.ended || xskillVideo1.paused)) {
+            // Start sequence again after a delay
+            setTimeout(setupBlock1Sequence, 1500);
+          } else {
+            setTimeout(checkRobotVideosEnded, 500);
+          }
+        };
+        setTimeout(checkRobotVideosEnded, 1000);
+      };
+    }, 2000); // 2 second delay before starting human video
+  }
+  
+  // Setup independent block 2 sequence playback
+  function setupBlock2Sequence() {
+    // Reset all block 2 videos
+    humanVideo2.currentTime = 0;
+    rhymeVideo2.currentTime = 0;
+    xskillVideo2.currentTime = 0;
+    
+    // Set initial opacity - all videos dimmed at start
+    humanVideo2.style.opacity = '0.3';
+    rhymeVideo2.style.opacity = '0.3';
+    xskillVideo2.style.opacity = '0.3';
+    
+    // Pause all videos initially
+    humanVideo2.pause();
+    rhymeVideo2.pause();
+    xskillVideo2.pause();
+    
+    // Wait a couple seconds then start the human video
+    setTimeout(function() {
+      // Now set human to full opacity and play
+      humanVideo2.style.opacity = '1';
+      humanVideo2.play().catch(e => console.error("Error playing human video 2:", e));
+      
+      // When human video ends, play robot videos at full opacity
+      humanVideo2.onended = function() {
+        // Set opacity
+        humanVideo2.style.opacity = '0.6'; // Dim human video when done
+        rhymeVideo2.style.opacity = '1';   // Show robot videos at full opacity
+        xskillVideo2.style.opacity = '1';
+        
+        // Play robot videos
+        rhymeVideo2.currentTime = 0;
+        xskillVideo2.currentTime = 0;
+        rhymeVideo2.play().catch(e => console.error("Error playing rhyme video 2:", e));
+        xskillVideo2.play().catch(e => console.error("Error playing xskill video 2:", e));
+        
+        // When robot videos end, start the sequence again
+        const checkRobotVideosEnded = function() {
+          if ((rhymeVideo2.ended || rhymeVideo2.paused) && 
+              (xskillVideo2.ended || xskillVideo2.paused)) {
+            // Start sequence again after a delay
+            setTimeout(setupBlock2Sequence, 1500);
+          } else {
+            setTimeout(checkRobotVideosEnded, 500);
+          }
+        };
+        setTimeout(checkRobotVideosEnded, 1000);
+      };
+    }, 2000); // 2 second delay before starting human video
+  }
+  
+  // Add manual control to each video
+  allVideos.forEach(video => {
+    // Clicking a video should pause/play all videos in the same block
+    video.addEventListener('click', function(e) {
+      // Only handle click if not on the controls
+      if (e.target === video) {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+    });
+    
+    // Pause automatic sequence when user interacts with controls
+    video.addEventListener('pause', function() {
+      // Clear the onended handler to stop auto-progression when user pauses
+      if (video === humanVideo1 || video === humanVideo2) {
+        video.onended = null;
+      }
+    });
+  });
+  
+  // Start both sequences with a slight delay between them
+  setTimeout(setupBlock1Sequence, 500);
+  setTimeout(setupBlock2Sequence, 1000);
+});
+      </script>
+
+      <!-- ============================== -->
+      <!-- Simulation (Franka Kitchen) Evaluations Section -->
+      <!-- ============================== -->
+      <section class="section">
+        <div class="container is-max-desktop">
+          <h2 class="title is-2 is-centered has-text-centered">Simulation (Franka Kitchen) Evaluations</h2>
+          
+          <!-- Text and image in a flex layout for wrapping -->
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-bottom: 2em;">
+            <!-- Text on the left -->
+            <div style="flex: 1.7; min-width: 350px; order: 1;">
+              <p style="text-align: justify; margin-bottom: 1em;">
+                The Franka Kitchen simulation environment allows us to precisely control execution mismatch levels. In our experiments, we created three demonstrators that are sphere agents, which look visually different from the robot, and established three distinct levels of mismatch:
+              </p>
+              <ul style="margin-left: 1.5em; text-align: left; margin-bottom: 1em;">
+                <li><b>Sphere-Easy:</b> Different appearance but similar execution style</li>
+                <li><b>Sphere-Medium:</b> Different appearance and different execution style</li>
+                <li><b>Sphere-Hard:</b> Different appearance, different execution style, and different physical capabilities (bimanual vs. uni-manual)</li>
+              </ul>
+              <p style="text-align: justify;">
+                The results show RHyME's robustness to increasing mismatch levels, outperforming XSkill especially in the most challenging scenarios where the sphere agents' execution differs significantly from the robot's capabilities.
+              </p>
+            </div>
+            
+            <!-- Image on the right (smaller size) -->
+            <figure style="flex: 1.1; min-width: 260px; max-width: 350px; margin: 0 auto; order: 2; display: flex; justify-content: center; align-items: center;">
+              <img src="./resources/sim_success.png" alt="Franka Kitchen Simulation Results" style="width: 100%;">
+            </figure>
+          </div>
+          
+          <!-- Simulation video demo -->
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <video poster="" id="kitchen-demo" autoplay controls muted loop playsinline width="100%">
+                <source src="./static/videos/simulation.mov" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          
+          <!-- Key observation section with full width styling -->
+          <div class="is-centered" style="width: 100%; margin-top: 1.5em; margin-bottom: 2em;">
+            <div style="padding: 1.2em; background-color: #f9f9f9; border-left: 5px solid #B31B1B; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+              <p style="text-align: justify; margin: 0; font-size: 1.05em;">
+                <b style="color: #B31B1B; font-size: 1.1em;">Key Observation:</b> RHyME successfully imitates tasks from sphere agents despite their significant visual and execution differences from the robot, enabling more robust generalization across varying levels of embodiment mismatch.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== -->
+      <!-- Mismatch Evaluation Section    -->
+      <!-- ============================== -->
+      <div class="column is-centered has-text-centered">
+        <h2 class="title is-2 is-centered has-text-centered">Visualizing Human-Robot Image Embeddings</h2>
+
+        <!-- Real-world T-SNE visualization -->
+        <div style="margin-bottom: 2em;">
+          <h3 class="title is-4">Real-World Task Embeddings</h3>
           <figure>
-            <img src="./static/images/realworld_poster.png" alt="Real World Eval">
-            <figcaption style="text-align: justify"><b>(Left)</b> Task Embeddings: We use t-SNE to visualize
-              cross-embodiment latent
-              embeddings from the human and robot completing three tasks. <b>(Right)</b> Task Completion: We compare the
-              performance of RHyME with XSkill on seen and unseen long-horizon tasks specified by human prompt videos.
-              Opaque segments indicate Task Completion rate, and augmented transparent bars indicate Task Attempt rate.
-              <b> Our method RHyME outperforms XSkill in seen and unseen tasks in the real world.</b>
+            <figcaption style="text-align: justify; margin-bottom: 1em;">
+              We use t-SNE to visualize cross-embodiment latent embeddings from the human and robot completing various tasks. 
+              Note how RHyME's learned representations group similar tasks together regardless of the embodiment (human or robot), 
+              showing the model's ability to recognize task semantics across different agents.
             </figcaption>
+            <img src="./resources/real_viz.png" alt="Real-world T-SNE visualization of task embeddings" style="max-width: 85%; margin: 0 auto;">
+          </figure>
+        </div>
+
+        <!-- Simulation T-SNE visualization -->
+        <div style="margin-top: 3em;">
+          <h3 class="title is-4">Simulation Task Embeddings Across Mismatch Levels</h3>
+          <figure>
+            <figcaption style="text-align: justify; margin-bottom: 1em;">
+              T-SNE visualization of task embeddings across our three simulation datasets with increasing levels of execution mismatch.
+              The plots demonstrate RHyME's consistent ability to cluster similar tasks together even as the execution mismatch 
+              becomes more pronounced from Sphere-Easy to Sphere-Hard.
+            </figcaption>
+            <img src="./resources/sim_viz.png" alt="Simulation T-SNE visualization across different mismatch levels" style="max-width: 85%; margin: 0 auto;">
           </figure>
         </div>
       </div>
 
-      <h2 class="title is-2 is-centered has-text-centered">Challenging Demonstrators in Simulation</h2>
-      <div class="columns is-centered has-text-centered">
-
-        <div class="item item-steve" style="margin: 2%">
-          <video poster="" id="steve" autoplay controls muted loop playsinline width="80%">
-            <source src="./static/videos/simulation.mov" type="video/mp4">
-          </video>
-        </div>
-      </div>
-
-      <div class="columns is-centered has-text-centered">
-        <div class="column">
-          <p style="text-align: justify">We present results on three datasets. As the demonstrator's
-            actions visually and physically deviate further from those of the robot, <b>policies trained with our
-              framework RHyME consistently outperform XSkill in a simulation setting.</b>
-          </p>
-          <div class="column">
-            <!-- <figure>
-              <img src="./resources/Recall.png" alt="Introduction Figure">
-              <figcaption style="text-align: justify">We measure Task Recall, which assesses proportion of successfully
-                completed tasks out of all attempted tasks.
-                As the execution becomes increasingly mismatched, RHyME is able to maintain relatively higher rates of
-                task recall compared to XSkill.
-              </figcaption>
-            </figure>
-            <figure>
-              <img src="./resources/Imprecision.png" alt="Introduction Figure">
-              <figcaption style="text-align: justify">We also measure Task Imprecision, which reports the percentage of
-                incorrect tasks the robot attempts, i.e. those that were not specified by the human prompt.
-                When attempting the hard scenario with mismatch in appearance, execution, and manual dexterity, RHyME
-                achieves significantly lower imprecision rates than XSkill.
-              </figcaption>
-            </figure> -->
-            <figure>
-              <img src="./resources/fig_success_poster.png" alt="Introduction Figure" />
-              <figcaption style="text-align: justify"><b>(Left)</b> Given a human hand demonstration, RHyME outperforms
-                XSkill
-                on seen and unseen tasks, with higher success rates and attempt rates.
-                In simulation, as the execution becomes increasingly mismatched, RHyME is able to maintain relatively
-                higher rates of
-                task success compared to XSkill.
-                <b>(Right)</b> We measure the Task Recall %, which assesses the proportion of successfully completed
-                tasks out
-                of all attempted tasks. Finetuning the embeddings improves performance on both XSkill and RHyME, but
-                RHyME consistently outperforms XSkill across the board.
-            </figure>
-          </div>
-        </div>
-
-
-        <!-- <br> -->
-      </div>
+     
   </section>
 
-
+  <!-- Commented out old paper section - preserved for reference -->
   <!-- <section class="section">
-  <div class="container is-max-desktop">
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column" id="Paper">
-        <h2 class="title is-3">Paper TODO</h2>
-    <div class="paper-thumbnail">
-        <a href="https://arxiv.org/abs/2402.18796.pdf">
-            <img class="layered-paper-big" width="100%" src="./resources/preview_mosaic.png" alt="Paper thumbnail"/>
-        </a>
-    </div>
-    <div class="paper-info">
-        <a href="https://openreview.net/forum?id=rxlokRzNWRq"><h3>ManiCast: Collaborative Manipulation with Cost-Aware Human Forecasting</h3></a>
-        <p>Kushal Kedia, Prithwish Dan, Atiksh Bhardwaj, Sanjiban Choudhury</p>
-        <h3 class="title is-4" style="text-align: center;">BibTex</h3>
-<pre style="overflow-x:hidden; text-wrap:wrap; white-space: pre-wrap;"><code>@misc{TODO
-}   
-</code></pre> 
-    </div>
-    </div>
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@inproceedings{
-    kedia2023manicast,
-    title={ManiCast: Collaborative Manipulation with Cost-Aware Human Forecasting},
-    author={Kushal Kedia and Prithwish Dan and Atiksh Bhardwaj and Sanjiban Choudhury},
-    booktitle={7th Annual Conference on Robot Learning},
-    year={2023},
-    url={https://openreview.net/forum?id=rxlokRzNWRq}
-}</code></pre>
-  </div>
-</div>
-</section> -->
-
-  <section class="section">
     <div class="container is-max-desktop">
-
       <div class="columns is-centered has-text-centered">
         <div class="column" id="Paper">
-          <h2 class="title is-3">Paper</h2>
+          <h2 class="title is-3">Paper TODO</h2>
+          <div class="paper-thumbnail">
+            <a href="https://arxiv.org/abs/2402.18796.pdf">
+                <img class="layered-paper-big" width="100%" src="./resources/preview_mosaic.png" alt="Paper thumbnail"/>
+            </a>
+          </div>
+          <div class="paper-info">
+            <a href="https://openreview.net/forum?id=rxlokRzNWRq"><h3>ManiCast: Collaborative Manipulation with Cost-Aware Human Forecasting</h3></a>
+            <p>Kushal Kedia, Prithwish Dan, Atiksh Bhardwaj, Sanjiban Choudhury</p>
+            <h3 class="title is-4" style="text-align: center;">BibTex</h3>
+            <pre style="overflow-x:hidden; text-wrap:wrap; white-space: pre-wrap;"><code>@misc{TODO}</code></pre> 
+          </div>
+        </div>
+        <div class="container is-max-desktop content">
+          <h2 class="title">BibTeX</h2>
+          <pre><code>@inproceedings{
+            kedia2023manicast,
+            title={ManiCast: Collaborative Manipulation with Cost-Aware Human Forecasting},
+            author={Kushal Kedia and Prithwish Dan and Atiksh Bhardwaj and Sanjiban Choudhury},
+            booktitle={7th Annual Conference on Robot Learning},
+            year={2023},
+            url={https://openreview.net/forum?id=rxlokRzNWRq}
+          }</code></pre>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+  <!-- ============================== -->
+  <!-- Paper Section                  -->
+  <!-- ============================== -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column" id="Paper">
+          <h2 class="title is-2 is-centered has-text-centered">Paper</h2>
+          
+          <!-- Paper thumbnail with link -->
           <div class="paper-thumbnail">
             <a href="https://arxiv.org/abs/2409.06615">
               <img class="layered-paper-big" width="100%" src="./static/images/preview_rhyme.png"
                 alt="Paper thumbnail" />
             </a>
           </div>
+          
+          <!-- Paper citation information -->
           <div class="paper-info">
             <h3 class="title is-4" style="text-align: center;">BibTex</h3>
             <pre style="overflow-x:hidden; text-wrap:wrap; white-space: pre-wrap;"><code>@misc{kedia2024oneshotimitationmismatchedexecution,
@@ -426,22 +655,26 @@
           </div>
         </div>
       </div>
+    </div>
   </section>
 
   <br>
 
-
+  <!-- ============================== -->
+  <!-- Footer Section                 -->
+  <!-- ============================== -->
   <footer class="footer">
     <div class="container">
+      <!-- Commented out social icons - preserved for reference -->
       <!-- <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div> -->
+        <a class="icon-link" href="./static/videos/nerfies_paper.pdf">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div> -->
+      
       <div class="columns is-centered">
         <div class="column is-8">
           <div class="content has-text-centered">
