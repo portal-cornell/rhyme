@@ -239,7 +239,7 @@
             <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding-right: 0;">
               <h3 class="title is-5" style="margin-bottom: 0.5em !important; width: 100%;">Human Demonstration<br>(Input)</h3>
               <div style="width: 100%; position: relative;">
-                <video poster="" id="human-video-1" autoplay muted loop playsinline style="width: 100%;">
+                <video poster="" id="human-video-1" preload="auto" muted playsinline style="width: 100%;">
                   <source src="./static/videos/final/human_PDC.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -256,7 +256,7 @@
               <div style="flex: 1; margin-right: 10px; display: flex; flex-direction: column;">
                 <h3 class="title is-5" style="margin-bottom: 0.5em !important;">RHyME Execution<br>(Our Method)</h3>
                 <div style="flex-grow: 1; position: relative;">
-                  <video poster="" id="rhyme-video-1" autoplay muted loop playsinline style="width: 100%;">
+                  <video poster="" id="rhyme-video-1" preload="auto" muted playsinline style="width: 100%;">
                     <source src="./static/videos/final/rhyme_PDC.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                   </video>
@@ -266,7 +266,7 @@
               <div style="flex: 1; display: flex; flex-direction: column;">
                 <h3 class="title is-5" style="margin-bottom: 0.5em !important;">XSkill Execution<br>(Baseline)</h3>
                 <div style="flex-grow: 1; position: relative;">
-                  <video poster="" id="xskill-video-1" autoplay muted loop playsinline style="width: 100%;">
+                  <video poster="" id="xskill-video-1" preload="auto" muted playsinline style="width: 100%;">
                     <source src="./static/videos/final/xskill_PDC.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                   </video>
@@ -305,7 +305,7 @@
             <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding-right: 0;">
               <h3 class="title is-5" style="margin-bottom: 0.5em !important; width: 100%;">Human Demonstration<br>(Input)</h3>
               <div style="width: 100%; position: relative;">
-                <video poster="" id="human-video-2" autoplay muted loop playsinline style="width: 100%;">
+                <video poster="" id="human-video-2" preload="auto" muted playsinline style="width: 100%;">
                   <source src="./static/videos/final/human_LPD.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -322,7 +322,7 @@
               <div style="flex: 1; margin-right: 10px; display: flex; flex-direction: column;">
                 <h3 class="title is-5" style="margin-bottom: 0.5em !important;">RHyME Execution<br>(Our Method)</h3>
                 <div style="flex-grow: 1; position: relative;">
-                  <video poster="" id="rhyme-video-2" autoplay muted loop playsinline style="width: 100%;">
+                  <video poster="" id="rhyme-video-2" preload="auto" muted playsinline style="width: 100%;">
                     <source src="./static/videos/final/rhyme_LPD.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                   </video>
@@ -332,7 +332,7 @@
               <div style="flex: 1; display: flex; flex-direction: column;">
                 <h3 class="title is-5" style="margin-bottom: 0.5em !important;">XSkill Execution<br>(Baseline)</h3>
                 <div style="flex-grow: 1; position: relative;">
-                  <video poster="" id="xskill-video-2" autoplay muted loop playsinline style="width: 100%;">
+                  <video poster="" id="xskill-video-2" preload="auto" muted playsinline style="width: 100%;">
                     <source src="./static/videos/final/xskill_LPD.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                   </video>
@@ -349,90 +349,463 @@
           <b>Key Observation:</b> XSkill attempts tasks that weren't specified in the human demonstration, showing that it lacks precision in following the intended sequence. RHyME maintains higher fidelity to the exact tasks demonstrated by the human.
         </p>
       </div>
-    </div>
-  </section>
 
-  <!-- ============================== -->
-  <!-- Simulation (Franka Kitchen) Evaluations Section -->
-  <!-- ============================== -->
-  <section class="section">
-    <div class="container is-max-desktop">
-      <h2 class="title is-2 is-centered has-text-centered">Simulation (Franka Kitchen) Evaluations</h2>
+      <!-- Add JavaScript for video coordination -->
+      <script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("DOM Content Loaded - Initializing video coordination");
+  
+  // Get video elements for first block
+  const humanVideo1 = document.getElementById('human-video-1');
+  const rhymeVideo1 = document.getElementById('rhyme-video-1');
+  const xskillVideo1 = document.getElementById('xskill-video-1');
+  
+  // Get video elements for second block
+  const humanVideo2 = document.getElementById('human-video-2');
+  const rhymeVideo2 = document.getElementById('rhyme-video-2');
+  const xskillVideo2 = document.getElementById('xskill-video-2');
+  
+  // Verify all video elements are found
+  console.log("Video elements found:", 
+    humanVideo1 ? "human1 ✓" : "human1 ✗",
+    rhymeVideo1 ? "rhyme1 ✓" : "rhyme1 ✗",
+    xskillVideo1 ? "xskill1 ✓" : "xskill1 ✗",
+    humanVideo2 ? "human2 ✓" : "human2 ✗",
+    rhymeVideo2 ? "rhyme2 ✓" : "rhyme2 ✗",
+    xskillVideo2 ? "xskill2 ✓" : "xskill2 ✗"
+  );
+  
+  // Add error handlers to all videos
+  [humanVideo1, rhymeVideo1, xskillVideo1, humanVideo2, rhymeVideo2, xskillVideo2].forEach(video => {
+    if (video) {
+      video.addEventListener('error', function(e) {
+        console.error(`Error loading video ${this.id}:`, e);
+        console.error('Video error details:', this.error);
+      });
       
-      <!-- Text and image in a flex layout for wrapping -->
-      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-bottom: 2em;">
-        <!-- Text on the left -->
-        <div style="flex: 1.7; min-width: 350px; order: 1;">
-          <p style="text-align: justify; margin-bottom: 1em;">
-            The Franka Kitchen simulation environment allows us to precisely control execution mismatch levels. In our experiments, we created three demonstrators that are sphere agents, which look visually different from the robot, and established three distinct levels of mismatch:
-          </p>
-          <ul style="margin-left: 1.5em; text-align: left; margin-bottom: 1em;">
-            <li><b>Sphere-Easy:</b> Different appearance but similar execution style</li>
-            <li><b>Sphere-Medium:</b> Different appearance and different execution style</li>
-            <li><b>Sphere-Hard:</b> Different appearance, different execution style, and different physical capabilities (bimanual vs. uni-manual)</li>
-          </ul>
-          <p style="text-align: justify;">
-            The results show RHyME's robustness to increasing mismatch levels, outperforming XSkill especially in the most challenging scenarios where the sphere agents' execution differs significantly from the robot's capabilities.
-          </p>
-        </div>
+      video.addEventListener('loadeddata', function() {
+        console.log(`Video loaded successfully: ${this.id}`);
+      });
+    }
+  });
+  
+  // Create arrays for each video block
+  const block1Videos = [humanVideo1, rhymeVideo1, xskillVideo1];
+  const block2Videos = [humanVideo2, rhymeVideo2, xskillVideo2];
+  const allVideos = [...block1Videos, ...block2Videos];
+  
+  // Make sure we're working with valid video elements before proceeding
+  if (!humanVideo1 || !rhymeVideo1 || !xskillVideo1 || !humanVideo2 || !rhymeVideo2 || !xskillVideo2) {
+    console.error("One or more video elements not found. Aborting video coordination setup.");
+    return;
+  }
+  
+  // Helper function to properly initialize a video
+  function initVideo(video) {
+    // Set initial properties
+    video.playbackRate = 1.0;
+    video.muted = true;
+    video.currentTime = 0;
+    video.controls = true;
+    video.style.opacity = '0.3';
+    
+    // Stop any playback
+    try {
+      video.pause();
+    } catch (e) {
+      console.error("Error pausing video:", e);
+    }
+    
+    // Remove all event listeners by cloning and replacing
+    const clone = video.cloneNode(true);
+    if (video.parentNode) {
+      video.parentNode.replaceChild(clone, video);
+    }
+    return document.getElementById(video.id); // Return the new reference
+  }
+  
+  // Initialize all videos
+  let updatedHumanVideo1 = initVideo(humanVideo1);
+  let updatedRhymeVideo1 = initVideo(rhymeVideo1);
+  let updatedXskillVideo1 = initVideo(xskillVideo1);
+  let updatedHumanVideo2 = initVideo(humanVideo2);
+  let updatedRhymeVideo2 = initVideo(rhymeVideo2);
+  let updatedXskillVideo2 = initVideo(xskillVideo2);
+  
+  // Setup independent block 1 sequence playback
+  function setupBlock1Sequence() {
+    console.log("Setting up block 1 sequence");
+    
+    // Get fresh references
+    const human1 = document.getElementById('human-video-1');
+    const rhyme1 = document.getElementById('rhyme-video-1');
+    const xskill1 = document.getElementById('xskill-video-1');
+    
+    if (!human1 || !rhyme1 || !xskill1) {
+      console.error("Missing videos for block 1. Aborting sequence.");
+      return;
+    }
+    
+    // Reset videos
+    human1.currentTime = 0;
+    rhyme1.currentTime = 0;
+    xskill1.currentTime = 0;
+    
+    // Make sure robot videos are explicitly paused
+    rhyme1.pause();
+    xskill1.pause();
+    
+    // Add event listeners to ensure robot videos remain paused until we're ready
+    const keepRobotVideosPaused = function() {
+      if (!human1.ended) {
+        rhyme1.pause();
+        xskill1.pause();
+      }
+    };
+    
+    // Add play event listeners to immediately pause if they try to play
+    rhyme1.addEventListener('play', keepRobotVideosPaused);
+    xskill1.addEventListener('play', keepRobotVideosPaused);
+    
+    // Set opacity
+    human1.style.opacity = '1';  // Make human video visible immediately
+    rhyme1.style.opacity = '0.3';
+    xskill1.style.opacity = '0.3';
+    
+    // Set up ended handler for human video
+    human1.onended = function() {
+      console.log("Human video 1 ended");
+      
+      // Double-check that the human video has actually ended
+      if (human1.currentTime < human1.duration) {
+        console.log("Human video 1 ended event triggered prematurely, waiting...");
+        // Set a timeout to check again in a moment
+        setTimeout(function() {
+          // Only proceed if the video has actually ended
+          if (human1.currentTime >= human1.duration - 0.1) {
+            handleHuman1Ended();
+          } else {
+            console.log("Still waiting for human video 1 to complete...");
+            // Add another check after a short delay
+            setTimeout(function() {
+              handleHuman1Ended();
+            }, 1000);
+          }
+        }, 200);
+        return;
+      }
+      
+      handleHuman1Ended();
+    };
+    
+    // Separate function to handle human1 video ending
+    function handleHuman1Ended() {
+      console.log("Processing human video 1 ended");
+      
+      // Remove the pause enforcement listeners
+      rhyme1.removeEventListener('play', keepRobotVideosPaused);
+      xskill1.removeEventListener('play', keepRobotVideosPaused);
+      
+      // Update opacity - keep human video at full opacity
+      human1.style.opacity = '1.0'; // Keep human video at full opacity
+      rhyme1.style.opacity = '1';
+      xskill1.style.opacity = '1';
+      
+      // Play robot videos after a significant delay to ensure human video is truly done
+      setTimeout(function() {
+        rhyme1.currentTime = 0;
+        xskill1.currentTime = 0;
         
-        <!-- Image on the right (smaller size) -->
-        <figure style="flex: 1.1; min-width: 260px; max-width: 350px; margin: 0 auto; order: 2; display: flex; justify-content: center; align-items: center;">
-          <img src="./resources/sim_success.png" alt="Franka Kitchen Simulation Results" style="width: 100%;">
-        </figure>
-      </div>
+        // Play both robot videos
+        const rhymePlay = rhyme1.play();
+        const xskillPlay = xskill1.play();
+        
+        // Handle promise rejections
+        if (rhymePlay) rhymePlay.catch(e => console.error("Error playing rhyme1:", e));
+        if (xskillPlay) xskillPlay.catch(e => console.error("Error playing xskill1:", e));
+        
+        console.log("Started playing robot videos for block 1");
+      }, 1000); // Increased delay to be safer
+    }
+    
+    // Play human video after a short delay
+    setTimeout(function() {
+      const playPromise = human1.play();
+      if (playPromise) {
+        playPromise.catch(e => {
+          console.error("Error auto-playing human video 1:", e);
+          console.log("Trying manual play with user interaction...");
+          
+          // Add a helpful message for debugging
+          alert("Please click to enable video playback. This is due to browser autoplay restrictions.");
+        });
+      }
+      console.log("Started playing human video for block 1");
+    }, 1000);
+  }
+  
+  // Setup independent block 2 sequence playback
+  function setupBlock2Sequence() {
+    console.log("Setting up block 2 sequence");
+    
+    // Get fresh references
+    const human2 = document.getElementById('human-video-2');
+    const rhyme2 = document.getElementById('rhyme-video-2');
+    const xskill2 = document.getElementById('xskill-video-2');
+    
+    if (!human2 || !rhyme2 || !xskill2) {
+      console.error("Missing videos for block 2. Aborting sequence.");
+      return;
+    }
+    
+    // Reset videos
+    human2.currentTime = 0;
+    rhyme2.currentTime = 0;
+    xskill2.currentTime = 0;
+    
+    // Make sure robot videos are explicitly paused
+    rhyme2.pause();
+    xskill2.pause();
+    
+    // Add event listeners to ensure robot videos remain paused until we're ready
+    const keepRobotVideosPaused = function() {
+      if (!human2.ended) {
+        rhyme2.pause();
+        xskill2.pause();
+      }
+    };
+    
+    // Add play event listeners to immediately pause if they try to play
+    rhyme2.addEventListener('play', keepRobotVideosPaused);
+    xskill2.addEventListener('play', keepRobotVideosPaused);
+    
+    // Set opacity
+    human2.style.opacity = '1';  // Make human video visible immediately
+    rhyme2.style.opacity = '0.3';
+    xskill2.style.opacity = '0.3';
+    
+    // Set up ended handler for human video
+    human2.onended = function() {
+      console.log("Human video 2 ended");
       
-      <!-- Simulation video demo -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <video poster="" id="kitchen-demo" autoplay controls muted loop playsinline width="100%">
-            <source src="./static/videos/final/simulation.mp4" type="video/mp4">
-          </video>
+      // Double-check that the human video has actually ended
+      if (human2.currentTime < human2.duration) {
+        console.log("Human video 2 ended event triggered prematurely, waiting...");
+        // Set a timeout to check again in a moment
+        setTimeout(function() {
+          // Only proceed if the video has actually ended
+          if (human2.currentTime >= human2.duration - 0.1) {
+            handleHuman2Ended();
+          } else {
+            console.log("Still waiting for human video 2 to complete...");
+            // Add another check after a short delay
+            setTimeout(function() {
+              handleHuman2Ended();
+            }, 1000);
+          }
+        }, 200);
+        return;
+      }
+      
+      handleHuman2Ended();
+    };
+    
+    // Separate function to handle human2 video ending
+    function handleHuman2Ended() {
+      console.log("Processing human video 2 ended");
+      
+      // Remove the pause enforcement listeners
+      rhyme2.removeEventListener('play', keepRobotVideosPaused);
+      xskill2.removeEventListener('play', keepRobotVideosPaused);
+      
+      // Update opacity - keep human video at full opacity
+      human2.style.opacity = '1.0'; // Keep human video at full opacity
+      rhyme2.style.opacity = '1';
+      xskill2.style.opacity = '1';
+      
+      // Play robot videos after a significant delay to ensure human video is truly done
+      setTimeout(function() {
+        rhyme2.currentTime = 0;
+        xskill2.currentTime = 0;
+        
+        // Play both robot videos
+        const rhymePlay = rhyme2.play();
+        const xskillPlay = xskill2.play();
+        
+        // Handle promise rejections
+        if (rhymePlay) rhymePlay.catch(e => console.error("Error playing rhyme2:", e));
+        if (xskillPlay) xskillPlay.catch(e => console.error("Error playing xskill2:", e));
+        
+        console.log("Started playing robot videos for block 2");
+      }, 1000); // Increased delay to be safer
+    }
+    
+    // Play human video after a short delay
+    setTimeout(function() {
+      const playPromise = human2.play();
+      if (playPromise) {
+        playPromise.catch(e => {
+          console.error("Error auto-playing human video 2:", e);
+          console.log("Trying manual play with user interaction...");
+          
+          // Add a helpful message for debugging
+          alert("Please click to enable video playback for Task Sequence #2. This is due to browser autoplay restrictions.");
+        });
+      }
+      console.log("Started playing human video for block 2");
+    }, 3000); // Longer delay for the second block
+  }
+  
+  // Add click handlers to manually start videos if autoplay fails
+  document.getElementById('block1-container').addEventListener('click', function() {
+    const human1 = document.getElementById('human-video-1');
+    if (human1 && human1.paused) {
+      human1.play().catch(e => console.error("Error playing human1 on click:", e));
+    }
+  });
+  
+  document.getElementById('block2-container').addEventListener('click', function() {
+    const human2 = document.getElementById('human-video-2');
+    if (human2 && human2.paused) {
+      human2.play().catch(e => console.error("Error playing human2 on click:", e));
+    }
+  });
+  
+  // Handle manual video controls
+  document.querySelectorAll('video').forEach(video => {
+    video.addEventListener('play', function() {
+      console.log("Manual play:", this.id);
+    });
+  });
+  
+  // Start both sequences with a delay between them
+  console.log("Starting video sequences");
+  
+  // Start first sequence immediately
+  setupBlock1Sequence();
+  
+  // Start second sequence after a shorter delay
+  setTimeout(setupBlock2Sequence, 2000); // Reduced from 4000ms to 2000ms
+});
+      </script>
+
+      <!-- ============================== -->
+      <!-- Simulation (Franka Kitchen) Evaluations Section -->
+      <!-- ============================== -->
+      <section class="section">
+        <div class="container is-max-desktop">
+          <h2 class="title is-2 is-centered has-text-centered">Simulation (Franka Kitchen) Evaluations</h2>
+          
+          <!-- Text and image in a flex layout for wrapping -->
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-bottom: 2em;">
+            <!-- Text on the left -->
+            <div style="flex: 1.7; min-width: 350px; order: 1;">
+              <p style="text-align: justify; margin-bottom: 1em;">
+                The Franka Kitchen simulation environment allows us to precisely control execution mismatch levels. In our experiments, we created three demonstrators that are sphere agents, which look visually different from the robot, and established three distinct levels of mismatch:
+              </p>
+              <ul style="margin-left: 1.5em; text-align: left; margin-bottom: 1em;">
+                <li><b>Sphere-Easy:</b> Different appearance but similar execution style</li>
+                <li><b>Sphere-Medium:</b> Different appearance and different execution style</li>
+                <li><b>Sphere-Hard:</b> Different appearance, different execution style, and different physical capabilities (bimanual vs. uni-manual)</li>
+              </ul>
+              <p style="text-align: justify;">
+                The results show RHyME's robustness to increasing mismatch levels, outperforming XSkill especially in the most challenging scenarios where the sphere agents' execution differs significantly from the robot's capabilities.
+              </p>
+            </div>
+            
+            <!-- Image on the right (smaller size) -->
+            <figure style="flex: 1.1; min-width: 260px; max-width: 350px; margin: 0 auto; order: 2; display: flex; justify-content: center; align-items: center;">
+              <img src="./resources/sim_success.png" alt="Franka Kitchen Simulation Results" style="width: 100%;">
+            </figure>
+          </div>
+          
+          <!-- Simulation video demo -->
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <video poster="" id="kitchen-demo" autoplay controls muted loop playsinline width="100%">
+                <source src="./static/videos/final/simulation.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+          
+          <!-- Key observation section with full width styling -->
+          <div class="is-centered" style="width: 100%; margin-top: 1.5em; margin-bottom: 2em;">
+            <div style="padding: 1.2em; background-color: #f9f9f9; border-left: 5px solid #B31B1B; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+              <p style="text-align: justify; margin: 0; font-size: 1.05em;">
+                <b style="color: #B31B1B; font-size: 1.1em;">Key Observation:</b> RHyME successfully imitates tasks from sphere agents despite their significant visual and execution differences from the robot, enabling more robust generalization across varying levels of embodiment mismatch.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================== -->
+      <!-- Mismatch Evaluation Section    -->
+      <!-- ============================== -->
+      <div class="column is-centered has-text-centered">
+        <h2 class="title is-2 is-centered has-text-centered">Visualizing Human-Robot Image Embeddings</h2>
+
+        <!-- Real-world T-SNE visualization -->
+        <div style="margin-bottom: 2em;">
+          <h3 class="title is-4">Real-World Task Embeddings</h3>
+          <figure>
+            <figcaption style="text-align: justify; margin-bottom: 1em;">
+              We use t-SNE to visualize cross-embodiment latent embeddings from the human and robot completing various tasks. 
+              Note how RHyME's learned representations group similar tasks together regardless of the embodiment (human or robot), 
+              showing the model's ability to recognize task semantics across different agents.
+            </figcaption>
+            <img src="./resources/real_viz.png" alt="Real-world T-SNE visualization of task embeddings" style="max-width: 85%; margin: 0 auto;">
+          </figure>
+        </div>
+
+        <!-- Simulation T-SNE visualization -->
+        <div style="margin-top: 3em;">
+          <h3 class="title is-4">Simulation Task Embeddings Across Mismatch Levels</h3>
+          <figure>
+            <figcaption style="text-align: justify; margin-bottom: 1em;">
+              T-SNE visualization of task embeddings across our three simulation datasets with increasing levels of execution mismatch.
+              The plots demonstrate how task embeddings start to diverge as mismatch in execution levels increase.
+            </figcaption>
+            <img src="./resources/sim_viz.png" alt="Simulation T-SNE visualization across different mismatch levels" style="max-width: 85%; margin: 0 auto;">
+          </figure>
         </div>
       </div>
-      
-      <!-- Key observation section with full width styling -->
-      <div class="is-centered" style="width: 100%; margin-top: 1.5em; margin-bottom: 2em;">
-        <div style="padding: 1.2em; background-color: #f9f9f9; border-left: 5px solid #B31B1B; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-          <p style="text-align: justify; margin: 0; font-size: 1.05em;">
-            <b style="color: #B31B1B; font-size: 1.1em;">Key Observation:</b> RHyME successfully imitates tasks from sphere agents despite their significant visual and execution differences from the robot, enabling more robust generalization across varying levels of embodiment mismatch.
-          </p>
-        </div>
-      </div>
-    </div>
+
+     
   </section>
 
-  <!-- ============================== -->
-  <!-- Mismatch Evaluation Section    -->
-  <!-- ============================== -->
-  <div class="column is-centered has-text-centered">
-    <h2 class="title is-2 is-centered has-text-centered">Visualizing Human-Robot Image Embeddings</h2>
-
-    <!-- Real-world T-SNE visualization -->
-    <div style="margin-bottom: 2em;">
-      <h3 class="title is-4">Real-World Task Embeddings</h3>
-      <figure>
-        <figcaption style="text-align: justify; margin-bottom: 1em;">
-          We use t-SNE to visualize cross-embodiment latent embeddings from the human and robot completing various tasks. 
-          Note how RHyME's learned representations group similar tasks together regardless of the embodiment (human or robot), 
-          showing the model's ability to recognize task semantics across different agents.
-        </figcaption>
-        <img src="./resources/real_viz.png" alt="Real-world T-SNE visualization of task embeddings" style="max-width: 85%; margin: 0 auto;">
-      </figure>
+  <!-- Commented out old paper section - preserved for reference -->
+  <!-- <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column" id="Paper">
+          <h2 class="title is-3">Paper TODO</h2>
+          <div class="paper-thumbnail">
+            <a href="https://arxiv.org/abs/2402.18796.pdf">
+                <img class="layered-paper-big" width="100%" src="./resources/preview_mosaic.png" alt="Paper thumbnail"/>
+            </a>
+          </div>
+          <div class="paper-info">
+            <a href="https://openreview.net/forum?id=rxlokRzNWRq"><h3>ManiCast: Collaborative Manipulation with Cost-Aware Human Forecasting</h3></a>
+            <p>Kushal Kedia, Prithwish Dan, Atiksh Bhardwaj, Sanjiban Choudhury</p>
+            <h3 class="title is-4" style="text-align: center;">BibTex</h3>
+            <pre style="overflow-x:hidden; text-wrap:wrap; white-space: pre-wrap;"><code>@misc{TODO}</code></pre> 
+          </div>
+        </div>
+        <div class="container is-max-desktop content">
+          <h2 class="title">BibTeX</h2>
+          <pre><code>@inproceedings{
+            kedia2023manicast,
+            title={ManiCast: Collaborative Manipulation with Cost-Aware Human Forecasting},
+            author={Kushal Kedia and Prithwish Dan and Atiksh Bhardwaj and Sanjiban Choudhury},
+            booktitle={7th Annual Conference on Robot Learning},
+            year={2023},
+            url={https://openreview.net/forum?id=rxlokRzNWRq}
+          }</code></pre>
+        </div>
+      </div>
     </div>
-
-    <!-- Simulation T-SNE visualization -->
-    <div style="margin-top: 3em;">
-      <h3 class="title is-4">Simulation Task Embeddings Across Mismatch Levels</h3>
-      <figure>
-        <figcaption style="text-align: justify; margin-bottom: 1em;">
-          T-SNE visualization of task embeddings across our three simulation datasets with increasing levels of execution mismatch.
-          The plots demonstrate how task embeddings start to diverge as mismatch in execution levels increase.
-        </figcaption>
-        <img src="./resources/sim_viz.png" alt="Simulation T-SNE visualization across different mismatch levels" style="max-width: 85%; margin: 0 auto;">
-      </figure>
-    </div>
-  </div>
+  </section> -->
 
   <!-- ============================== -->
   <!-- Paper Section                  -->
