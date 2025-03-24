@@ -749,7 +749,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <h2 class="title is-2 is-centered has-text-centered">Visualizing Human-Robot Image Embeddings</h2>
 
       <!-- Real-world T-SNE visualization -->
-      <div style="margin-bottom: 2em;">
+      <div style="margin-bottom: 2em; text-align: center;">
         <h3 class="title is-4">Real-World Task Embeddings</h3>
         <figure>
           <figcaption style="text-align: justify; margin-bottom: 1em;">
@@ -757,19 +757,19 @@ document.addEventListener('DOMContentLoaded', function() {
             Note how RHyME's learned representations group similar tasks together regardless of the embodiment (human or robot), 
             showing the model's ability to recognize task semantics across different agents.
           </figcaption>
-          <img src="./resources/real_viz.png" alt="Real-world T-SNE visualization of task embeddings" style="max-width: 85%; margin: 0 auto;">
+          <img src="./resources/real_viz.png" alt="Real-world T-SNE visualization of task embeddings" style="max-width: 85%; margin: 0 auto; display: block;">
         </figure>
       </div>
 
       <!-- Simulation T-SNE visualization -->
-      <div style="margin-top: 3em;">
+      <div style="margin-top: 3em; text-align: center;">
         <h3 class="title is-4">Simulation Task Embeddings Across Mismatch Levels</h3>
         <figure>
           <figcaption style="text-align: justify; margin-bottom: 1em;">
             T-SNE visualization of task embeddings across our three simulation datasets with increasing levels of execution mismatch.
             The plots demonstrate how task embeddings start to diverge as mismatch in execution levels increase.
           </figcaption>
-          <img src="./resources/sim_viz.png" alt="Simulation T-SNE visualization across different mismatch levels" style="max-width: 85%; margin: 0 auto;">
+          <img src="./resources/sim_viz.png" alt="Simulation T-SNE visualization across different mismatch levels" style="max-width: 85%; margin: 0 auto; display: block;">
         </figure>
       </div>
     </div>
