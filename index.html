@@ -239,7 +239,7 @@
             <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding-right: 0;">
               <h3 class="title is-5" style="margin-bottom: 0.5em !important; width: 100%;">Human Demonstration<br>(Input)</h3>
               <div style="width: 100%; position: relative;">
-                <video poster="" id="human-video-1" autoplay muted loop playsinline style="width: 100%;">
+                <video poster="" id="human-video-1" muted playsinline style="width: 100%;">
                   <source src="./static/videos/high-quality/human_PDC.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -256,7 +256,7 @@
               <div style="flex: 1; margin-right: 10px; display: flex; flex-direction: column;">
                 <h3 class="title is-5" style="margin-bottom: 0.5em !important;">RHyME Execution<br>(Our Method)</h3>
                 <div style="flex-grow: 1; position: relative;">
-                  <video poster="" id="rhyme-video-1" autoplay muted loop playsinline style="width: 100%;">
+                  <video poster="" id="rhyme-video-1" muted playsinline style="width: 100%;">
                     <source src="./static/videos/high-quality/rhyme_PDC.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                   </video>
@@ -266,7 +266,7 @@
               <div style="flex: 1; display: flex; flex-direction: column;">
                 <h3 class="title is-5" style="margin-bottom: 0.5em !important;">XSkill Execution<br>(Baseline)</h3>
                 <div style="flex-grow: 1; position: relative;">
-                  <video poster="" id="xskill-video-1" autoplay muted loop playsinline style="width: 100%;">
+                  <video poster="" id="xskill-video-1" muted playsinline style="width: 100%;">
                     <source src="./static/videos/high-quality/xskill_PDC.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                   </video>
@@ -305,7 +305,7 @@
             <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding-right: 0;">
               <h3 class="title is-5" style="margin-bottom: 0.5em !important; width: 100%;">Human Demonstration<br>(Input)</h3>
               <div style="width: 100%; position: relative;">
-                <video poster="" id="human-video-2" autoplay muted loop playsinline style="width: 100%;">
+                <video poster="" id="human-video-2" muted playsinline style="width: 100%;">
                   <source src="./static/videos/high-quality/human_LPD.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -322,7 +322,7 @@
               <div style="flex: 1; margin-right: 10px; display: flex; flex-direction: column;">
                 <h3 class="title is-5" style="margin-bottom: 0.5em !important;">RHyME Execution<br>(Our Method)</h3>
                 <div style="flex-grow: 1; position: relative;">
-                  <video poster="" id="rhyme-video-2" autoplay muted loop playsinline style="width: 100%;">
+                  <video poster="" id="rhyme-video-2" muted playsinline style="width: 100%;">
                     <source src="./static/videos/high-quality/rhyme_LPD.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                   </video>
@@ -332,7 +332,7 @@
               <div style="flex: 1; display: flex; flex-direction: column;">
                 <h3 class="title is-5" style="margin-bottom: 0.5em !important;">XSkill Execution<br>(Baseline)</h3>
                 <div style="flex-grow: 1; position: relative;">
-                  <video poster="" id="xskill-video-2" autoplay muted loop playsinline style="width: 100%;">
+                  <video poster="" id="xskill-video-2" muted playsinline style="width: 100%;">
                     <source src="./static/videos/high-quality/xskill_LPD.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                   </video>
@@ -349,6 +349,345 @@
           <b>Key Observation:</b> XSkill attempts tasks that weren't specified in the human demonstration, showing that it lacks precision in following the intended sequence. RHyME maintains higher fidelity to the exact tasks demonstrated by the human.
         </p>
       </div>
+
+      <!-- Add JavaScript for video coordination -->
+      <script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("DOM Content Loaded - Initializing video coordination");
+  
+  // Get video elements for first block
+  const humanVideo1 = document.getElementById('human-video-1');
+  const rhymeVideo1 = document.getElementById('rhyme-video-1');
+  const xskillVideo1 = document.getElementById('xskill-video-1');
+  
+  // Get video elements for second block
+  const humanVideo2 = document.getElementById('human-video-2');
+  const rhymeVideo2 = document.getElementById('rhyme-video-2');
+  const xskillVideo2 = document.getElementById('xskill-video-2');
+  
+  // Verify all video elements are found
+  console.log("Video elements found:", 
+    humanVideo1 ? "human1 ✓" : "human1 ✗",
+    rhymeVideo1 ? "rhyme1 ✓" : "rhyme1 ✗",
+    xskillVideo1 ? "xskill1 ✓" : "xskill1 ✗",
+    humanVideo2 ? "human2 ✓" : "human2 ✗",
+    rhymeVideo2 ? "rhyme2 ✓" : "rhyme2 ✗",
+    xskillVideo2 ? "xskill2 ✓" : "xskill2 ✗"
+  );
+  
+  // Add error handlers to all videos
+  [humanVideo1, rhymeVideo1, xskillVideo1, humanVideo2, rhymeVideo2, xskillVideo2].forEach(video => {
+    if (video) {
+      video.addEventListener('error', function(e) {
+        console.error(`Error loading video ${this.id}:`, e);
+        console.error('Video error details:', this.error);
+      });
+      
+      video.addEventListener('loadeddata', function() {
+        console.log(`Video loaded successfully: ${this.id}`);
+      });
+    }
+  });
+  
+  // Create arrays for each video block
+  const block1Videos = [humanVideo1, rhymeVideo1, xskillVideo1];
+  const block2Videos = [humanVideo2, rhymeVideo2, xskillVideo2];
+  const allVideos = [...block1Videos, ...block2Videos];
+  
+  // Make sure we're working with valid video elements before proceeding
+  if (!humanVideo1 || !rhymeVideo1 || !xskillVideo1 || !humanVideo2 || !rhymeVideo2 || !xskillVideo2) {
+    console.error("One or more video elements not found. Aborting video coordination setup.");
+    return;
+  }
+  
+  // Helper function to properly initialize a video
+  function initVideo(video) {
+    // Set initial properties
+    video.playbackRate = 1.0;
+    video.muted = true;
+    video.currentTime = 0;
+    video.controls = true;
+    video.style.opacity = '0.3';
+    
+    // Stop any playback
+    try {
+      video.pause();
+    } catch (e) {
+      console.error("Error pausing video:", e);
+    }
+    
+    // Remove all event listeners by cloning and replacing
+    const clone = video.cloneNode(true);
+    if (video.parentNode) {
+      video.parentNode.replaceChild(clone, video);
+    }
+    return document.getElementById(video.id); // Return the new reference
+  }
+  
+  // Initialize all videos
+  let updatedHumanVideo1 = initVideo(humanVideo1);
+  let updatedRhymeVideo1 = initVideo(rhymeVideo1);
+  let updatedXskillVideo1 = initVideo(xskillVideo1);
+  let updatedHumanVideo2 = initVideo(humanVideo2);
+  let updatedRhymeVideo2 = initVideo(rhymeVideo2);
+  let updatedXskillVideo2 = initVideo(xskillVideo2);
+  
+  // Setup independent block 1 sequence playback
+  function setupBlock1Sequence() {
+    console.log("Setting up block 1 sequence");
+    
+    // Get fresh references
+    const human1 = document.getElementById('human-video-1');
+    const rhyme1 = document.getElementById('rhyme-video-1');
+    const xskill1 = document.getElementById('xskill-video-1');
+    
+    if (!human1 || !rhyme1 || !xskill1) {
+      console.error("Missing videos for block 1. Aborting sequence.");
+      return;
+    }
+    
+    // Reset videos
+    human1.currentTime = 0;
+    rhyme1.currentTime = 0;
+    xskill1.currentTime = 0;
+    
+    // Make sure robot videos are explicitly paused
+    rhyme1.pause();
+    xskill1.pause();
+    
+    // Add event listeners to ensure robot videos remain paused until we're ready
+    const keepRobotVideosPaused = function() {
+      if (!human1.ended) {
+        rhyme1.pause();
+        xskill1.pause();
+      }
+    };
+    
+    // Add play event listeners to immediately pause if they try to play
+    rhyme1.addEventListener('play', keepRobotVideosPaused);
+    xskill1.addEventListener('play', keepRobotVideosPaused);
+    
+    // Set opacity
+    human1.style.opacity = '1';  // Make human video visible immediately
+    rhyme1.style.opacity = '0.3';
+    xskill1.style.opacity = '0.3';
+    
+    // Set up ended handler for human video
+    human1.onended = function() {
+      console.log("Human video 1 ended");
+      
+      // Double-check that the human video has actually ended
+      if (human1.currentTime < human1.duration) {
+        console.log("Human video 1 ended event triggered prematurely, waiting...");
+        // Set a timeout to check again in a moment
+        setTimeout(function() {
+          // Only proceed if the video has actually ended
+          if (human1.currentTime >= human1.duration - 0.1) {
+            handleHuman1Ended();
+          } else {
+            console.log("Still waiting for human video 1 to complete...");
+            // Add another check after a short delay
+            setTimeout(function() {
+              handleHuman1Ended();
+            }, 1000);
+          }
+        }, 200);
+        return;
+      }
+      
+      handleHuman1Ended();
+    };
+    
+    // Separate function to handle human1 video ending
+    function handleHuman1Ended() {
+      console.log("Processing human video 1 ended");
+      
+      // Remove the pause enforcement listeners
+      rhyme1.removeEventListener('play', keepRobotVideosPaused);
+      xskill1.removeEventListener('play', keepRobotVideosPaused);
+      
+      // Update opacity - keep human video at full opacity
+      human1.style.opacity = '1.0'; // Keep human video at full opacity
+      rhyme1.style.opacity = '1';
+      xskill1.style.opacity = '1';
+      
+      // Play robot videos after a significant delay to ensure human video is truly done
+      setTimeout(function() {
+        rhyme1.currentTime = 0;
+        xskill1.currentTime = 0;
+        
+        // Play both robot videos
+        const rhymePlay = rhyme1.play();
+        const xskillPlay = xskill1.play();
+        
+        // Handle promise rejections
+        if (rhymePlay) rhymePlay.catch(e => console.error("Error playing rhyme1:", e));
+        if (xskillPlay) xskillPlay.catch(e => console.error("Error playing xskill1:", e));
+        
+        console.log("Started playing robot videos for block 1");
+      }, 1000); // Increased delay to be safer
+    }
+    
+    // Play human video after a short delay
+    setTimeout(function() {
+      const playPromise = human1.play();
+      if (playPromise) {
+        playPromise.catch(e => {
+          console.error("Error auto-playing human video 1:", e);
+          console.log("Trying manual play with user interaction...");
+          
+          // Add a helpful message for debugging
+          alert("Please click to enable video playback. This is due to browser autoplay restrictions.");
+        });
+      }
+      console.log("Started playing human video for block 1");
+    }, 1000);
+  }
+  
+  // Setup independent block 2 sequence playback
+  function setupBlock2Sequence() {
+    console.log("Setting up block 2 sequence");
+    
+    // Get fresh references
+    const human2 = document.getElementById('human-video-2');
+    const rhyme2 = document.getElementById('rhyme-video-2');
+    const xskill2 = document.getElementById('xskill-video-2');
+    
+    if (!human2 || !rhyme2 || !xskill2) {
+      console.error("Missing videos for block 2. Aborting sequence.");
+      return;
+    }
+    
+    // Reset videos
+    human2.currentTime = 0;
+    rhyme2.currentTime = 0;
+    xskill2.currentTime = 0;
+    
+    // Make sure robot videos are explicitly paused
+    rhyme2.pause();
+    xskill2.pause();
+    
+    // Add event listeners to ensure robot videos remain paused until we're ready
+    const keepRobotVideosPaused = function() {
+      if (!human2.ended) {
+        rhyme2.pause();
+        xskill2.pause();
+      }
+    };
+    
+    // Add play event listeners to immediately pause if they try to play
+    rhyme2.addEventListener('play', keepRobotVideosPaused);
+    xskill2.addEventListener('play', keepRobotVideosPaused);
+    
+    // Set opacity
+    human2.style.opacity = '1';  // Make human video visible immediately
+    rhyme2.style.opacity = '0.3';
+    xskill2.style.opacity = '0.3';
+    
+    // Set up ended handler for human video
+    human2.onended = function() {
+      console.log("Human video 2 ended");
+      
+      // Double-check that the human video has actually ended
+      if (human2.currentTime < human2.duration) {
+        console.log("Human video 2 ended event triggered prematurely, waiting...");
+        // Set a timeout to check again in a moment
+        setTimeout(function() {
+          // Only proceed if the video has actually ended
+          if (human2.currentTime >= human2.duration - 0.1) {
+            handleHuman2Ended();
+          } else {
+            console.log("Still waiting for human video 2 to complete...");
+            // Add another check after a short delay
+            setTimeout(function() {
+              handleHuman2Ended();
+            }, 1000);
+          }
+        }, 200);
+        return;
+      }
+      
+      handleHuman2Ended();
+    };
+    
+    // Separate function to handle human2 video ending
+    function handleHuman2Ended() {
+      console.log("Processing human video 2 ended");
+      
+      // Remove the pause enforcement listeners
+      rhyme2.removeEventListener('play', keepRobotVideosPaused);
+      xskill2.removeEventListener('play', keepRobotVideosPaused);
+      
+      // Update opacity - keep human video at full opacity
+      human2.style.opacity = '1.0'; // Keep human video at full opacity
+      rhyme2.style.opacity = '1';
+      xskill2.style.opacity = '1';
+      
+      // Play robot videos after a significant delay to ensure human video is truly done
+      setTimeout(function() {
+        rhyme2.currentTime = 0;
+        xskill2.currentTime = 0;
+        
+        // Play both robot videos
+        const rhymePlay = rhyme2.play();
+        const xskillPlay = xskill2.play();
+        
+        // Handle promise rejections
+        if (rhymePlay) rhymePlay.catch(e => console.error("Error playing rhyme2:", e));
+        if (xskillPlay) xskillPlay.catch(e => console.error("Error playing xskill2:", e));
+        
+        console.log("Started playing robot videos for block 2");
+      }, 1000); // Increased delay to be safer
+    }
+    
+    // Play human video after a short delay
+    setTimeout(function() {
+      const playPromise = human2.play();
+      if (playPromise) {
+        playPromise.catch(e => {
+          console.error("Error auto-playing human video 2:", e);
+          console.log("Trying manual play with user interaction...");
+          
+          // Add a helpful message for debugging
+          alert("Please click to enable video playback for Task Sequence #2. This is due to browser autoplay restrictions.");
+        });
+      }
+      console.log("Started playing human video for block 2");
+    }, 3000); // Longer delay for the second block
+  }
+  
+  // Add click handlers to manually start videos if autoplay fails
+  document.getElementById('block1-container').addEventListener('click', function() {
+    const human1 = document.getElementById('human-video-1');
+    if (human1 && human1.paused) {
+      human1.play().catch(e => console.error("Error playing human1 on click:", e));
+    }
+  });
+  
+  document.getElementById('block2-container').addEventListener('click', function() {
+    const human2 = document.getElementById('human-video-2');
+    if (human2 && human2.paused) {
+      human2.play().catch(e => console.error("Error playing human2 on click:", e));
+    }
+  });
+  
+  // Handle manual video controls
+  document.querySelectorAll('video').forEach(video => {
+    video.addEventListener('play', function() {
+      console.log("Manual play:", this.id);
+    });
+  });
+  
+  // Start both sequences with a delay between them
+  console.log("Starting video sequences");
+  
+  // Start first sequence immediately
+  setupBlock1Sequence();
+  
+  // Start second sequence after a shorter delay
+  setTimeout(setupBlock2Sequence, 2000); // Reduced from 4000ms to 2000ms
+});
+      </script>
     </div>
   </section>
 
