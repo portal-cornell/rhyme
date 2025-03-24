@@ -205,14 +205,22 @@
     <div class="container is-max-desktop">
       <h2 class="title is-2 is-centered has-text-centered">Real World Evaluations</h2>
 
-      <!-- Approach explanation and comparison -->
-      <div class="is-centered has-text-centered">
-        <p style="text-align: justify; padding-bottom: 1.5em;">
-          We compare RHyME to <a href="https://xskill.cs.columbia.edu">XSkill</a> for one-shot robot imitation from human videos. 
-          <b>The key difference:</b> XSkill trains policies using only robot data and struggles with execution mismatches, 
-          while <b>RHyME</b> creates synthetic paired human-robot data by pairing robot videos with similar human segments from unpaired data. 
-          Our approach better handles differences in embodiment and execution style, resulting in more accurate task imitation as shown in the videos below.
-        </p>
+      <!-- Text and image in a flex layout -->
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-bottom: 2em;">
+        <!-- Text on the left -->
+        <div style="flex: 1.7; min-width: 350px; order: 1;">
+          <p style="text-align: justify; padding-bottom: 1.5em;">
+            We compare RHyME to <a href="https://xskill.cs.columbia.edu">XSkill</a> for one-shot robot imitation from human videos. 
+            <b>The key difference:</b> XSkill trains policies using only robot data and struggles with execution mismatches, 
+            while <b>RHyME</b> creates synthetic paired human-robot data by pairing robot videos with similar human segments from unpaired data. 
+            Our approach better handles differences in embodiment and execution style, resulting in more accurate task imitation as shown in the videos below.
+          </p>
+        </div>
+        
+        <!-- Image on the right -->
+        <figure style="flex: 1.1; min-width: 260px; max-width: 350px; margin: 0 auto; order: 2; display: flex; justify-content: center; align-items: center;">
+          <img src="./resources/real_success.png" alt="Real World Evaluation Results" style="width: 100%;">
+        </figure>
       </div>
 
       <!-- Evaluation scenario 1: move pot, close drawer, drop cloth -->
@@ -695,7 +703,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
               <video poster="" id="kitchen-demo" autoplay controls muted loop playsinline width="100%">
-                <source src="./static/videos/final/simulation.mov" type="video/mp4">
+                <source src="./static/videos/simulation.mov" type="video/mp4">
               </video>
             </div>
           </div>
