@@ -239,8 +239,9 @@
             <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding-right: 0;">
               <h3 class="title is-5" style="margin-bottom: 0.5em !important; width: 100%;">Human Demonstration<br>(Input)</h3>
               <div style="width: 100%; position: relative;">
-                <video poster="" id="human-video-1" autoplay muted controls playsinline height="100%" style="width: 100%;">
+                <video poster="" id="human-video-1" preload="auto" muted playsinline style="width: 100%;">
                   <source src="./static/videos/final/human_PDC.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
                 </video>
               </div>
             </div>
@@ -255,8 +256,9 @@
               <div style="flex: 1; margin-right: 10px; display: flex; flex-direction: column;">
                 <h3 class="title is-5" style="margin-bottom: 0.5em !important;">RHyME Execution<br>(Our Method)</h3>
                 <div style="flex-grow: 1; position: relative;">
-                  <video poster="" id="rhyme-video-1" autoplay muted controls playsinline style="width: 100%; height: 100%;">
+                  <video poster="" id="rhyme-video-1" preload="auto" muted playsinline style="width: 100%;">
                     <source src="./static/videos/final/rhyme_PDC.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
                   </video>
                 </div>
               </div>
@@ -264,8 +266,9 @@
               <div style="flex: 1; display: flex; flex-direction: column;">
                 <h3 class="title is-5" style="margin-bottom: 0.5em !important;">XSkill Execution<br>(Baseline)</h3>
                 <div style="flex-grow: 1; position: relative;">
-                  <video poster="" id="xskill-video-1" autoplay muted controls playsinline style="width: 100%; height: 100%;">
+                  <video poster="" id="xskill-video-1" preload="auto" muted playsinline style="width: 100%;">
                     <source src="./static/videos/final/xskill_PDC.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
                   </video>
                 </div>
               </div>
@@ -302,8 +305,9 @@
             <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding-right: 0;">
               <h3 class="title is-5" style="margin-bottom: 0.5em !important; width: 100%;">Human Demonstration<br>(Input)</h3>
               <div style="width: 100%; position: relative;">
-                <video poster="" id="human-video-2" autoplay muted controls playsinline height="100%" style="width: 100%;">
+                <video poster="" id="human-video-2" preload="auto" muted playsinline style="width: 100%;">
                   <source src="./static/videos/final/human_LPD.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
                 </video>
               </div>
             </div>
@@ -318,8 +322,9 @@
               <div style="flex: 1; margin-right: 10px; display: flex; flex-direction: column;">
                 <h3 class="title is-5" style="margin-bottom: 0.5em !important;">RHyME Execution<br>(Our Method)</h3>
                 <div style="flex-grow: 1; position: relative;">
-                  <video poster="" id="rhyme-video-2" autoplay muted controls playsinline style="width: 100%; height: 100%;">
+                  <video poster="" id="rhyme-video-2" preload="auto" muted playsinline style="width: 100%;">
                     <source src="./static/videos/final/rhyme_LPD.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
                   </video>
                 </div>
               </div>
@@ -327,8 +332,9 @@
               <div style="flex: 1; display: flex; flex-direction: column;">
                 <h3 class="title is-5" style="margin-bottom: 0.5em !important;">XSkill Execution<br>(Baseline)</h3>
                 <div style="flex-grow: 1; position: relative;">
-                  <video poster="" id="xskill-video-2" autoplay muted controls playsinline style="width: 100%; height: 100%;">
+                  <video poster="" id="xskill-video-2" preload="auto" muted playsinline style="width: 100%;">
                     <source src="./static/videos/final/xskill_LPD.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
                   </video>
                 </div>
               </div>
@@ -346,7 +352,6 @@
 
       <!-- Add JavaScript for video coordination -->
       <script>
-// Video coordination script - creates a sequential playback loop
 document.addEventListener('DOMContentLoaded', function() {
   console.log("DOM Content Loaded - Initializing video coordination");
   
@@ -369,6 +374,20 @@ document.addEventListener('DOMContentLoaded', function() {
     rhymeVideo2 ? "rhyme2 ✓" : "rhyme2 ✗",
     xskillVideo2 ? "xskill2 ✓" : "xskill2 ✗"
   );
+  
+  // Add error handlers to all videos
+  [humanVideo1, rhymeVideo1, xskillVideo1, humanVideo2, rhymeVideo2, xskillVideo2].forEach(video => {
+    if (video) {
+      video.addEventListener('error', function(e) {
+        console.error(`Error loading video ${this.id}:`, e);
+        console.error('Video error details:', this.error);
+      });
+      
+      video.addEventListener('loadeddata', function() {
+        console.log(`Video loaded successfully: ${this.id}`);
+      });
+    }
+  });
   
   // Create arrays for each video block
   const block1Videos = [humanVideo1, rhymeVideo1, xskillVideo1];
@@ -661,8 +680,12 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Start both sequences with a delay between them
   console.log("Starting video sequences");
-  setTimeout(setupBlock1Sequence, 1000);
-  setTimeout(setupBlock2Sequence, 4000); // Start second sequence significantly later
+  
+  // Start first sequence immediately
+  setupBlock1Sequence();
+  
+  // Start second sequence after a shorter delay
+  setTimeout(setupBlock2Sequence, 2000); // Reduced from 4000ms to 2000ms
 });
       </script>
 
