@@ -2,12 +2,12 @@ base_dev_dir: '/share/portal/pd337'
 
 hydra:
   run:
-    dir: '${base_dev_dir}/xskill/experiment/label_sim_kitchen/${now:%Y-%m-%d_%H-%M-%S}'
+    dir: '${base_dev_dir}/rhyme/experiment/label_sim_kitchen/${now:%Y-%m-%d_%H-%M-%S}'
 
 resize_shape: [124,124]
-data_path: ${base_dev_dir}/xskill/datasets/kitchen_dataset
+data_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset
 pretrain_model_name: 'NO_PAIRING_TWOHANDS'
-exp_path: '${base_dev_dir}/xskill/experiment/pretrain/${pretrain_model_name}'
+exp_path: '${base_dev_dir}/rhyme/experiment/pretrain/${pretrain_model_name}'
 ckpt: 40
 cross_embodiment: 'twohands'
 device: 'cuda:0'

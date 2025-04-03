@@ -34,6 +34,7 @@ class Model(pl.LightningModule):
         positive_window=1,
         negative_window=10,
         pretrain_pipeline=None,
+        paired_dataloader=None,
         use_tcc_loss=False,
         use_opt_loss=True,
         tcc_coef=1,
@@ -41,9 +42,10 @@ class Model(pl.LightningModule):
         unsupervised_training=True,
         warmup_steps=0,
         paired_dataloader_len=0,
-        use_paired_data=False
     ):
         super(Model, self).__init__()
+
+
         self.dim = dim
         self.T = T
         self.clutser_T = clutser_T
@@ -75,7 +77,7 @@ class Model(pl.LightningModule):
 
 
         self.pretrain_pipeline = pretrain_pipeline
-        self.use_paired_data = use_paired_data
+        self.paired_dataloader = paired_dataloader
         self.paired_optimizer = torch.optim.Adam(self.encoder_q.parameters(), lr=self.lr)
         self.use_tcc_loss = use_tcc_loss
         self.use_opt_loss = use_opt_loss
@@ -199,13 +201,9 @@ class Model(pl.LightningModule):
     
     def training_step(self, batch, batch_idx):
         start_time = time.time()
-        if self.use_paired_data:
-            robot_batch, human_batch, paired_batch = batch
-            paired_robot_batch, paired_human_batch = paired_batch
-        else:
-            robot_batch, human_batch = batch
-
-        if self.num_steps_completed >= self.warmup_steps and self.use_paired_data:
+        robot_batch, human_batch, paired_batch = batch
+        paired_robot_batch, paired_human_batch = paired_batch
+        if self.num_steps_completed >= self.warmup_steps:
             self.paired_training_step(paired_robot_batch, paired_human_batch, batch_idx)
         else:
             print(self.num_steps_completed)
@@ -213,7 +211,7 @@ class Model(pl.LightningModule):
             self.training_step_helper(robot_batch, batch_idx)
             self.training_step_helper(human_batch, batch_idx)
         self.num_steps_completed += 1
-        print("Total time during one batch = ", time.time() - start_time)
+        # print("Total time during one batch = ", time.time() - start_time)
 
     # @profile
     def paired_training_step(self, robot_batch, human_batch, batch_idx):

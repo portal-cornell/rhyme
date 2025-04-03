@@ -1,6 +1,6 @@
 base_dev_dir: '/share/portal/pd337'
 hydra.job.config.save_dir: null
-save_dir: '${base_dev_dir}/xskill/experiment/diffusion_bc/kitchen/'
+save_dir: '${base_dev_dir}/rhyme/experiment/diffusion_bc/kitchen/'
 policy_name: 'FILL'
 
 # IMPORTANT SETTINGS:
@@ -39,7 +39,7 @@ pretrain_resize: [124,124]
 pretrain_pipeline: ["center_crop_112_112","normalize"]
 
 pretrain_model_name: '...'
-pretrain_path: '${base_dev_dir}/xskill/experiment/pretrain/${pretrain_model_name}'
+pretrain_path: '${base_dev_dir}/rhyme/experiment/pretrain/${pretrain_model_name}'
 pretrain_ckpt: 79
 # dataset
 raw_representation: True
@@ -51,9 +51,9 @@ unconditioned_policy: False
 SAT_state_only: False
 cross_embodiment: '...'
 dataset:
-  _target_: xskill.dataset.diffusion_bc_dataset.KitchenBCDataset
+  _target_: rhyme.dataset.diffusion_bc_dataset.KitchenBCDataset
   resize_shape: ${bc_resize}
-  data_dirs: ['${base_dev_dir}/xskill/datasets/kitchen_dataset/robot']
+  data_dirs: ['${base_dev_dir}/rhyme/datasets/kitchen_dataset/robot']
   proto_dirs: ${pretrain_path}/encode_protos/ckpt_${pretrain_ckpt}
   pred_horizon: ${pred_horizon}
   obs_horizon: ${obs_horizon}
@@ -65,7 +65,7 @@ dataset:
   one_hot_prototype: ${one_hot_prototype}
   prototype_snap: True
   snap_frames: 100
-  mask: ${base_dev_dir}/xskill/datasets/kitchen_dataset/train_mask.json
+  mask: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/train_mask.json
   obs_image_based: True
   unnormal_list: ['proto_snap','protos']
   seed: ${seed}
@@ -74,7 +74,7 @@ dataset:
   paired_data: False
   paired_percent: 0
   paired_proto_dirs: ${pretrain_path}/${cross_embodiment}_encode_protos/ckpt_${pretrain_ckpt} 
-  paired_demo_img_path: ${base_dev_dir}/xskill/datasets/kitchen_dataset/
+  paired_demo_img_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/
   nearest_neighbor_replacement: False
   nearest_neighbor_data_dirs: ${pretrain_path}/${cross_embodiment}_l2/ckpt_${pretrain_ckpt} 
   replace_percent: 0
@@ -84,13 +84,13 @@ dataset:
 
 
 upsample_proto_net:
-  _target_: xskill.model.network.Mlp
+  _target_: rhyme.model.network.Mlp
   in_size: ${proto_dim}
   out_size: 256
   net_arch: []
 
 proto_pred_net:
-  _target_: xskill.model.transformer.TorchTransformerProtoPredictor
+  _target_: rhyme.model.transformer.TorchTransformerProtoPredictor
   query_dim: ${proto_dim} 
   heads: 4
   dim_feedforward: 512
@@ -99,7 +99,7 @@ proto_pred_net:
   use_encoder: True
   input_dim: null
   pos_encoder:
-    _target_: xskill.model.transformer.PositionalEncoding
+    _target_: rhyme.model.transformer.PositionalEncoding
     size: ${proto_dim} 
     max_len: 200
     frequency: 10000
@@ -108,7 +108,7 @@ proto_pred_net:
 # diffusion
 num_diffusion_iters: 60
 noise_pred_net:
-  _target_: xskill.model.diffusion_model.ConditionalUnet1D
+  _target_: rhyme.model.diffusion_model.ConditionalUnet1D
   input_dim: ${action_dim}
   global_cond_dim: null
 
@@ -123,7 +123,7 @@ task_progess_ratio_list: [1]
 demo_type_list: ['robot','human']
 
 eval_callback:
-  _target_: xskill.utility.diffusion_bc_callback.visual_diffusion_bc_prediction_callback
+  _target_: rhyme.utility.diffusion_bc_callback.visual_diffusion_bc_prediction_callback
   raw_representation: ${raw_representation}
   softmax_prototype: ${softmax_prototype}
   prototype: ${prototype}
@@ -144,8 +144,8 @@ eval_cfg:
   bc_resize: ${bc_resize}
   pretrain_pipeline: ${pretrain_pipeline}
   resize_shape: ${pretrain_resize} # resize shape for pretrain
-  eval_mask_path: ${base_dev_dir}/xskill/datasets/kitchen_dataset/eval_mask.json
-  demo_path: ${base_dev_dir}/xskill/datasets/kitchen_dataset/
+  eval_mask_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/eval_mask.json
+  demo_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/
   demo_item: 247
   demo_type: 'human'
 

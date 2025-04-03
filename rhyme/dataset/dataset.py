@@ -1,8 +1,8 @@
 from collections import namedtuple
 import numpy as np
 import torch
-from rhyme.utility.file_utils import get_subdirs
-from rhyme.utility.file_utils import load_image
+from xskill.utility.file_utils import get_subdirs
+from xskill.utility.file_utils import load_image
 import random
 import collections
 import torchvision.transforms as T
@@ -207,6 +207,7 @@ class PairedRepDataset(torch.utils.data.Dataset):
         )
         vids = np.array(vids)
         vids_paired = np.array(vids_paired)
+
         if self.vid_mask is not None:
             vids = vids[self.vid_mask]
             vids_paired = vids_paired[self.vid_mask]
@@ -301,7 +302,7 @@ class PairedRepDataset(torch.utils.data.Dataset):
 
         sample_paired = self._frame_sampler.sample(vid_paired_paths)
         sequence_data_paired = self._get_sequence_data(sample_paired,self.resize_shape)  # (T,h,w,dim)
-        
+
         im_q = self.transform(sequence_data)
         im_q_paired = self.transform(sequence_data_paired)
         return torch.Tensor(im_q), torch.Tensor(im_q_paired)
@@ -336,3 +337,15 @@ class ConcatDatasetMax(torch.utils.data.Dataset):
 
     def __len__(self):
         return self.max_len
+
+
+# consider changing to this
+# class ConcatDataset(torch.utils.data.Dataset):
+#     def __init__(self, *datasets):
+#         self.datasets = datasets
+
+#     def __getitem__(self, i):
+#         return tuple(d[i%len(d)] for d in self.datasets)
+
+#     def __len__(self):
+#         return max(len(d) for d in self.datasets)

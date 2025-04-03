@@ -21,18 +21,14 @@ def pretrain(cfg: DictConfig):
     seed_everything(cfg.seed, workers=True)
     robot_dataset = hydra.utils.instantiate(cfg.robot_dataset)
     human_dataset = hydra.utils.instantiate(cfg.human_dataset)
-    if cfg.use_paired_data:
-        paired_dataset = hydra.utils.instantiate(cfg.paired_dataset)
-        if cfg.use_max_dataset:
-            combine_dataset = ConcatDatasetMax(robot_dataset, human_dataset, paired_dataset)
-        else:
-            combine_dataset = ConcatDataset(robot_dataset, human_dataset, paired_dataset)
+
+    paired_dataset = hydra.utils.instantiate(cfg.paired_dataset)
+
+    if cfg.use_max_dataset:
+        combine_dataset = ConcatDatasetMax(robot_dataset, human_dataset, paired_dataset)
     else:
-        if cfg.use_max_dataset:
-            combine_dataset = ConcatDatasetMax(robot_dataset, human_dataset)
-        else:
-            combine_dataset = ConcatDataset(robot_dataset, human_dataset)
-            
+        combine_dataset = ConcatDataset(robot_dataset, human_dataset, paired_dataset)
+        
     dataloader = torch.utils.data.DataLoader(
         combine_dataset,
         batch_size=cfg.batch_size,
@@ -43,12 +39,12 @@ def pretrain(cfg: DictConfig):
         drop_last=cfg.drop_last)
 
     steps_per_epoch = len(dataloader)
+
     model = hydra.utils.instantiate(
         cfg.Model,
         steps_per_epoch=steps_per_epoch,
         pretrain_pipeline=pretrain_pipeline,
         paired_dataloader_len=len(dataloader),
-        use_paired_data=cfg.use_paired_data
     )
 
     print("dataset len: ", len(combine_dataset))

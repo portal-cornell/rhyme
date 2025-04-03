@@ -30,8 +30,12 @@ To set up the simulation dataset:
 ### Simulation
 
 Datasets (Visual Encoder):
-- robot
-- twohands
+- robot 
+- human (Sphere-Easy)
+- singlehand (Sphere-Medium)
+- twohands (Sphere-Hard)
+- robot_segments_paired_human and human_segments_paired_human (Optional)
+- robot_segments_paired_singlehand and singlehand_segments_paired_singlehand (Optional)
 - robot_segments_paired_twohands and twohands_segments_paired_twohands (Optional)
 
 Datasets (Diffusion Policy):
@@ -50,6 +54,10 @@ Datasets (Diffusion Policy):
    use_paired_data (True/False)
    paired_dataset.percentage_pairing (0-1)
    ```
+   Example configs are provided:
+   ```bash
+   python scripts/skill_discovery.py --config-name=human_pretrain
+   ```
 2. Convert images into latent vectors using pretrained visual encoder: 
    ```bash
    python scripts/label_sim_kitchen_dataset.py
@@ -59,6 +67,7 @@ Datasets (Diffusion Policy):
    cross_embodiment (human, singlehand, twohands)
    pretrain_model_name
    ckpt
+   include_robot
    ```
 3. Compute and store sequence-level distance metrics between cross embodiment play data and robot data:
    ```
