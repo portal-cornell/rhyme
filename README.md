@@ -25,7 +25,7 @@ Follow these steps to install `RHyME`:
 
 To set up the simulation dataset:
 
-1. Instructions TBD
+1. ```robot_dataset = load_dataset('prithwishdan/RHyME', '<embodiment>', split='train')``` to load the datasets!
 
 ## 🚴‍♂️ Training
 
