@@ -9,8 +9,8 @@ import wandb
 from diffusers.optimization import get_scheduler
 from diffusers.training_utils import EMAModel
 from omegaconf import DictConfig, OmegaConf
-from xskill.model.diffusion_model import get_resnet, replace_bn_with_gn
-from xskill.model.encoder import ResnetConv
+from rhyme.model.diffusion_model import get_resnet, replace_bn_with_gn
+from rhyme.model.encoder import ResnetConv
 import random
 from tqdm import tqdm
 

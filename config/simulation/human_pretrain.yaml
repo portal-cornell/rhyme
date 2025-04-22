@@ -5,7 +5,7 @@ hydra:
   run:
     dir: '${base_dev_dir}/rhyme/experiment/pretrain/${exp_name}_${now:%Y-%m-%d_%H-%M-%S}'
 
-seed: 45
+seed: 20
 batch_size: 28
 num_workers: 1
 pin_memory: false

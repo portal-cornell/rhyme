@@ -1,5 +1,5 @@
 base_dev_dir: /share/portal/pd337
-exp_name: no_pairing_HARD
+exp_name: huggingface_no_pairing_MEDIUM
 
 hydra:
   run:
@@ -11,7 +11,7 @@ num_workers: 1
 pin_memory: false
 persistent_workers: true
 drop_last: true
-cross_embodiment: twohands
+cross_embodiment: singlehand
 use_max_dataset: true
 unsupervised_training: true
 resize_shape:
@@ -20,9 +20,9 @@ resize_shape:
 max_get_threads: 24
 robot_dataset:
   _target_: rhyme.dataset.dataset.EpisodeTrajDataset
-  _allowed_dirs:
-  - ${base_dev_dir}/rhyme/datasets/kitchen_dataset/robot
-  vid_mask: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/train_mask.json
+  dataset_name: prithwishdan/RHyME
+  config_name: robot
+  split: train
   frame_sampler:
     _target_: rhyme.dataset.frame_samplers.UniformDownSampleSampler
     offset: 0
@@ -33,9 +33,9 @@ robot_dataset:
   max_get_threads: ${max_get_threads}
 human_dataset:
   _target_: rhyme.dataset.dataset.EpisodeTrajDataset
-  _allowed_dirs:
-  - ${base_dev_dir}/rhyme/datasets/kitchen_dataset/${cross_embodiment}
-  vid_mask: ${robot_dataset.vid_mask}
+  dataset_name: prithwishdan/RHyME
+  config_name: sphere-medium
+  split: train
   frame_sampler:
     _target_: rhyme.dataset.frame_samplers.UniformDownSampleSampler
     offset: ${robot_dataset.frame_sampler.offset}
@@ -46,16 +46,13 @@ human_dataset:
   max_get_threads: ${max_get_threads}
 paired_dataset:
   _target_: rhyme.dataset.dataset.PairedRepDataset
-  _allowed_dirs:
-  - ${base_dev_dir}/rhyme/datasets/kitchen_dataset/robot_segments_paired_twohands
-  - ${base_dev_dir}/rhyme/datasets/kitchen_dataset/twohands_segments_paired_twohands
-  vid_mask: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/robot_segments_paired_twohands/train_mask.json
+  dataset_name: prithwishdan/RHyME
+  config_name: sphere-medium+robot
   frame_sampler:
     _target_: rhyme.dataset.frame_samplers.UniformDownSampleSampler
     offset: ${robot_dataset.frame_sampler.offset}
     num_frames: 30
     downsample_ratio: ${robot_dataset.frame_sampler.downsample_ratio}
-  slide: ${robot_dataset.slide}
   resize_shape: ${resize_shape}
   max_get_threads: ${max_get_threads}
   percentage_pairing: 1
@@ -69,7 +66,7 @@ Trainer:
   accelerator: gpu
   devices:
   - 0
-  max_epochs: 80
+  max_epochs: 45
   enable_progress_bar: true
   log_every_n_steps: 10
 n_layer: 8
@@ -99,6 +96,7 @@ Model:
   tcc_coef: 1
   ot_coef: 1
   unsupervised_training: ${unsupervised_training}
+  warmup_steps: 0
   skill_prior:
     _target_: rhyme.model.encoder.VisualMotionPrior
     out_size: 128

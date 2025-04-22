@@ -7,6 +7,7 @@ import json
 from omegaconf import DictConfig
 import hydra
 import omegaconf
+import torch.nn.functional as F
 
 def load_images(folder_path, resize_shape=None):
     images = []  # initialize an empty list to store the images
@@ -229,8 +230,8 @@ def tcc_loss_(emb1, emb2):
     cycled_frames = torch.argmax(beta_ret2[0], dim=1)
     dists_t = torch.abs(torch.Tensor(np.arange(len(cycled_frames))).to('cuda') - cycled_frames)
     dists = dists_t.argsort(descending=True)
-    print(dists_t[dists[0]])
-    return F.mse_loss(cycle_back, emb1), distances, sorted_indices, np.arange(len(cycled_frames))[dists[0]], human_frames[dists[0]].item(), cycled_frames[dists[0]].item()
+    # print(dists_t[dists[0]])
+    return F.mse_loss(cycle_back, emb1)
 
 def compute_tcc_loss(zc_r, zc_h):
     robot_cycle_back_loss = tcc_loss_(zc_r, zc_h)

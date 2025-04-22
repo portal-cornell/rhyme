@@ -5,8 +5,8 @@ from hydra.core.hydra_config import HydraConfig
 from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning.callbacks import ModelCheckpoint, TQDMProgressBar
 import wandb
-from xskill.dataset.dataset import ConcatDatasetMax
-from xskill.utility.transform import get_transform_pipeline
+from rhyme.dataset.dataset import ConcatDatasetMax
+from rhyme.utility.transform import get_transform_pipeline
 
 
 @hydra.main(version_base=None,

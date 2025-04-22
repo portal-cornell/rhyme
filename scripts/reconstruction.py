@@ -20,7 +20,7 @@ import seaborn as sns
 import cv2
 import json
 import matplotlib.pyplot as plt
-from xskill.utility.eval_utils import gif_of_clip, traj_representations, load_model
+from rhyme.utility.eval_utils import gif_of_clip, traj_representations, load_model
 
 def find_episode_and_frame(human_z_idx, idx_dict):
     """

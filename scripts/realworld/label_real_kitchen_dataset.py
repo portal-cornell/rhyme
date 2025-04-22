@@ -6,12 +6,12 @@ import hydra
 import torch
 import omegaconf
 from tqdm import tqdm
-from xskill.utility.transform import get_transform_pipeline
+from rhyme.utility.transform import get_transform_pipeline
 import zarr
 import concurrent.futures
 from pathlib import Path
 import cv2
-from xskill.dataset.real_data_conversion import portal_real_data_to_replay_buffer
+from rhyme.dataset.real_data_conversion import portal_real_data_to_replay_buffer
 
 
 def repeat_last_proto(encode_protos, eps_len):

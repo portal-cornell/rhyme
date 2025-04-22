@@ -73,6 +73,8 @@ class visual_diffusion_bc_prediction_callback:
         self.env = self.create_env()
         self.use_r3m = use_r3m
         self.use_voltron = use_voltron
+        # Add dataset cache
+        self.dataset_cache = {}
 
         if self.task_progess_ratio is not None:
             self.model = self.load_pretrain_model(pretain_model_path,
@@ -128,133 +130,329 @@ class visual_diffusion_bc_prediction_callback:
 
     def load_demo(self, eval_cfg):
         """
-        demo images -> cv2 resize -> torch pipeline
+        Load demo from either local files or Huggingface dataset
+        Options:
+        1. Load from local files (original approach)
+        2. Load from Huggingface dataset (new approach)
         """
-        eval_mask = load_json(eval_cfg.eval_mask_path)
-        assert eval_cfg.demo_item in np.arange(len(eval_mask))[eval_mask]
-        # load demo
-        if self.task_progess_ratio is None:
-            if eval_cfg.demo_type == "human":
-                demo_emd = load_json(
-                    os.path.join(
-                        eval_cfg.pretrain_path,
-                        "human_encode_protos",
-                        f"ckpt_{eval_cfg.pretrain_ckpt}",
-                        f"{eval_cfg.demo_item}",
-                        "affordance_state_embs.json",
-                    ))
-                demo_proto = load_json(
-                    os.path.join(
-                        eval_cfg.pretrain_path,
-                        "human_encode_protos",
-                        f"ckpt_{eval_cfg.pretrain_ckpt}",
-                        f"{eval_cfg.demo_item}",
-                        "encode_protos.json",
-                    ))
-                demo_softmax_proto = load_json(
-                    os.path.join(
-                        eval_cfg.pretrain_path,
-                        "human_encode_protos",
-                        f"ckpt_{eval_cfg.pretrain_ckpt}",
-                        f"{eval_cfg.demo_item}",
-                        "softmax_encode_protos.json",
-                    ))
-                demo_skill_rep = load_json(
-                    os.path.join(
-                        eval_cfg.pretrain_path,
-                        "human_encode_protos",
-                        f"ckpt_{eval_cfg.pretrain_ckpt}",
-                        f"{eval_cfg.demo_item}",
-                        "traj_representation.json",
-                    ))
+        # Check if we should use Huggingface dataset
+        if hasattr(eval_cfg, 'use_huggingface') and eval_cfg.use_huggingface:
+            # Create cache key from dataset parameters
+            cache_key = f"{eval_cfg.dataset_name}_{eval_cfg.demo_type}_{eval_cfg.split}"
+            
+            # Try to get dataset from cache first
+            if cache_key not in self.dataset_cache:
+                # Load dataset from Huggingface if not in cache
+                from datasets import load_dataset
+                hf_dataset = load_dataset(
+                    eval_cfg.dataset_name, 
+                    eval_cfg.demo_type, 
+                    split=eval_cfg.split
+                )
+                print(f"Loaded dataset {eval_cfg.dataset_name}/{eval_cfg.demo_type} "
+                      f"split {eval_cfg.split} with {len(hf_dataset)} samples")
+                # Store in cache
+                self.dataset_cache[cache_key] = hf_dataset
             else:
-                demo_emd = load_json(
-                    os.path.join(
-                        eval_cfg.pretrain_path,
-                        "encode_protos",
-                        f"ckpt_{eval_cfg.pretrain_ckpt}",
-                        f"{eval_cfg.demo_item}",
-                        "affordance_state_embs.json",
-                    ))
-                demo_proto = load_json(
-                    os.path.join(
-                        eval_cfg.pretrain_path,
-                        "encode_protos",
-                        f"ckpt_{eval_cfg.pretrain_ckpt}",
-                        f"{eval_cfg.demo_item}",
-                        "encode_protos.json",
-                    ))
-                demo_softmax_proto = load_json(
-                    os.path.join(
-                        eval_cfg.pretrain_path,
-                        "encode_protos",
-                        f"ckpt_{eval_cfg.pretrain_ckpt}",
-                        f"{eval_cfg.demo_item}",
-                        "softmax_encode_protos.json",
-                    ))
-                demo_skill_rep = load_json(
-                    os.path.join(
-                        eval_cfg.pretrain_path,
-                        "encode_protos",
-                        f"ckpt_{eval_cfg.pretrain_ckpt}",
-                        f"{eval_cfg.demo_item}",
-                        "traj_representation.json",
-                    ))
+                print(f"Using cached dataset for {cache_key}")
+                hf_dataset = self.dataset_cache[cache_key]
 
-            demo_emd = torch.tensor(demo_emd, dtype=torch.float32).cuda()
+            # IMPORTANT: eval_cfg.demo_item is actually the video_id, not the dataset index
+            video_id = eval_cfg.demo_item
+            
+            # Find the sample with this video_id in the dataset
+            sample = None
+            for idx, item in enumerate(hf_dataset):
+                if str(item["video_id"]) == str(video_id):
+                    sample = item
+                    print(f"Found video_id {video_id} at index {idx}")
+                    break
+            
+            if sample is None:
+                raise ValueError(f"Could not find sample with video_id {video_id} in the dataset")
+            
+            # Now proceed with the prototype loading as before, using the video_id
+            if self.task_progess_ratio is None:
+                if eval_cfg.demo_type == "human":
+                    demo_emd = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "human_encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{video_id}",
+                            "affordance_state_embs.json",
+                        ))
+                    demo_proto = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "human_encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{video_id}",
+                            "encode_protos.json",
+                        ))
+                    demo_softmax_proto = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "human_encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{video_id}",
+                            "softmax_encode_protos.json",
+                        ))
+                    demo_skill_rep = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "human_encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{video_id}",
+                            "traj_representation.json",
+                        ))
+                else:
+                    demo_emd = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{video_id}",
+                            "affordance_state_embs.json",
+                        ))
+                    demo_proto = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{video_id}",
+                            "encode_protos.json",
+                        ))
+                    demo_softmax_proto = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{video_id}",
+                            "softmax_encode_protos.json",
+                        ))
+                    demo_skill_rep = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{video_id}",
+                            "traj_representation.json",
+                        ))
 
+                demo_emd = torch.tensor(demo_emd, dtype=torch.float32).cuda()
+
+            else:
+                # If we need to compute embeddings from the frames
+                if hasattr(eval_cfg, 'use_huggingface_frames') and eval_cfg.use_huggingface_frames:
+                    # Get frames from the dataset
+                    from datasets import Image
+                    image_decoder = Image()
+                    
+                    # Get encoded frames from the sample
+                    frames_encoded = sample["frames"]
+                    
+                    # Process all frames
+                    demo_videos = []
+                    for frame_idx in range(len(frames_encoded)):
+                        # Decode the frame
+                        frame_pil = image_decoder.decode_example(frames_encoded[frame_idx])
+                        
+                        # Convert PIL image to numpy array
+                        frame_np = np.array(frame_pil)
+                        
+                        # Resize if needed
+                        if hasattr(eval_cfg, 'resize_shape') and eval_cfg.resize_shape is not None:
+                            frame_np = cv2.resize(frame_np, tuple(eval_cfg.resize_shape))
+                            
+                        demo_videos.append(frame_np)
+                    
+                    # Convert to numpy array
+                    demo_videos = np.stack(demo_videos)
+                else:
+                    # Use original method to load video
+                    demo_videos = self.load_video(eval_cfg)
+                
+                demo_len = len(demo_videos)
+                sample_index = (
+                    np.arange(int(demo_len * self.task_progess_ratio)) /
+                    self.task_progess_ratio).astype(np.int32)
+                demo_videos = demo_videos[sample_index]
+                
+                # Process videos based on model type
+                if self.use_voltron:
+                    imgs = self.model[1](demo_videos).to("cuda")
+                    visual_embeddings = self.model[0](imgs, mode="visual")
+                    traj_representation = self.model[2](visual_embeddings)
+                    demo_skill_rep = traj_representation.detach().cpu().numpy()
+                    return None, None, None, demo_skill_rep
+                
+                # Apply transform pipeline
+                pretrain_pipeline = get_transform_pipeline(
+                    eval_cfg.pretrain_pipeline)
+                images_tensor = convert_images_to_tensors(
+                    demo_videos, pretrain_pipeline).cuda()
+
+                eps_len = images_tensor.shape[0]
+
+                if self.use_r3m:
+                    traj_representation = self.model(images_tensor)
+                    demo_skill_rep = traj_representation.detach().cpu().numpy()
+                    return None, None, None, demo_skill_rep
+
+                im_q = torch.stack([
+                    images_tensor[j:j + self.model.slide + 1]
+                    for j in range(eps_len - self.model.slide)
+                ])
+                z = self.model.encoder_q(im_q, None)
+                softmax_z = torch.softmax(z / self.model.T, dim=1)
+                affordance_emb = self.model.skill_prior(
+                    im_q[:, :self.model.stack_frames], None)
+                state_representation = self.model.encoder_q.get_state_representation(
+                    im_q, None)
+                traj_representation = self.model.encoder_q.get_traj_representation(
+                    state_representation)
+                # demo_skill_rep
+                traj_representation = repeat_last_proto(traj_representation,
+                                                        eps_len)
+                demo_skill_rep = traj_representation.detach().cpu().numpy()
+                # demo_proto
+                encode_protos = repeat_last_proto(z, eps_len)
+                demo_proto = encode_protos.detach().cpu().numpy()
+                # demo_softmax_proto
+                softmax_encode_protos = repeat_last_proto(softmax_z, eps_len)
+                demo_softmax_proto = softmax_encode_protos.detach().cpu().numpy()
+                # demo_emd
+                demo_emd = affordance_emb.detach().cpu().numpy()
         else:
-            # sample frames based on ratio
-            pretrain_pipeline = get_transform_pipeline(
-                eval_cfg.pretrain_pipeline)
-            demo_videos = self.load_video(eval_cfg)
-            demo_len = len(demo_videos)
-            sample_index = (
-                np.arange(int(demo_len * self.task_progess_ratio)) /
-                self.task_progess_ratio).astype(np.int32)
-            demo_videos = demo_videos[sample_index]
-            # print("demo video shape", demo_videos.shape)
-            if self.use_voltron:
-                imgs = self.model[1](demo_videos).to("cuda")
-                visual_embeddings = self.model[0](imgs, mode="visual")
-                traj_representation = self.model[2](visual_embeddings)
+            # Original implementation for loading from local files
+            if hasattr(eval_cfg, 'eval_mask_path') and eval_cfg.eval_mask_path:
+                eval_mask = load_json(eval_cfg.eval_mask_path)
+                assert eval_cfg.demo_item in np.arange(len(eval_mask))[eval_mask]
+                
+            # load demo
+            if self.task_progess_ratio is None:
+                if eval_cfg.demo_type == "human":
+                    demo_emd = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "human_encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{eval_cfg.demo_item}",
+                            "affordance_state_embs.json",
+                        ))
+                    demo_proto = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "human_encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{eval_cfg.demo_item}",
+                            "encode_protos.json",
+                        ))
+                    demo_softmax_proto = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "human_encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{eval_cfg.demo_item}",
+                            "softmax_encode_protos.json",
+                        ))
+                    demo_skill_rep = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "human_encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{eval_cfg.demo_item}",
+                            "traj_representation.json",
+                        ))
+                else:
+                    demo_emd = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{eval_cfg.demo_item}",
+                            "affordance_state_embs.json",
+                        ))
+                    demo_proto = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{eval_cfg.demo_item}",
+                            "encode_protos.json",
+                        ))
+                    demo_softmax_proto = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{eval_cfg.demo_item}",
+                            "softmax_encode_protos.json",
+                        ))
+                    demo_skill_rep = load_json(
+                        os.path.join(
+                            eval_cfg.pretrain_path,
+                            "encode_protos",
+                            f"ckpt_{eval_cfg.pretrain_ckpt}",
+                            f"{eval_cfg.demo_item}",
+                            "traj_representation.json",
+                        ))
+
+                demo_emd = torch.tensor(demo_emd, dtype=torch.float32).cuda()
+
+            else:
+                # sample frames based on ratio
+                pretrain_pipeline = get_transform_pipeline(
+                    eval_cfg.pretrain_pipeline)
+                demo_videos = self.load_video(eval_cfg)
+                demo_len = len(demo_videos)
+                sample_index = (
+                    np.arange(int(demo_len * self.task_progess_ratio)) /
+                    self.task_progess_ratio).astype(np.int32)
+                demo_videos = demo_videos[sample_index]
+                
+                if self.use_voltron:
+                    imgs = self.model[1](demo_videos).to("cuda")
+                    visual_embeddings = self.model[0](imgs, mode="visual")
+                    traj_representation = self.model[2](visual_embeddings)
+                    demo_skill_rep = traj_representation.detach().cpu().numpy()
+                    return None, None, None, demo_skill_rep
+                    
+                images_tensor = convert_images_to_tensors(
+                    demo_videos, pretrain_pipeline).cuda()
+
+                eps_len = images_tensor.shape[0]
+
+                if self.use_r3m:
+                    traj_representation = self.model(images_tensor)
+                    demo_skill_rep = traj_representation.detach().cpu().numpy()
+                    return None, None, None, demo_skill_rep
+
+                im_q = torch.stack([
+                    images_tensor[j:j + self.model.slide + 1]
+                    for j in range(eps_len - self.model.slide)
+                ])  # (b,slide+1,c,h,w)
+                z = self.model.encoder_q(im_q, None)
+                softmax_z = torch.softmax(z / self.model.T, dim=1)
+                affordance_emb = self.model.skill_prior(
+                    im_q[:, :self.model.stack_frames], None)
+                state_representation = self.model.encoder_q.get_state_representation(
+                    im_q, None)
+                traj_representation = self.model.encoder_q.get_traj_representation(
+                    state_representation)
+                # demo_skill_rep
+                traj_representation = repeat_last_proto(traj_representation,
+                                                        eps_len)
                 demo_skill_rep = traj_representation.detach().cpu().numpy()
-                return None, None, None, demo_skill_rep
-            images_tensor = convert_images_to_tensors(
-                demo_videos, pretrain_pipeline).cuda()
-            # print("images_tensor", images_tensor.shape)
-
-            eps_len = images_tensor.shape[0]
-
-            if self.use_r3m:
-                traj_representation = self.model(images_tensor)
-                demo_skill_rep = traj_representation.detach().cpu().numpy()
-                return None, None, None, demo_skill_rep
-
-            im_q = torch.stack([
-                images_tensor[j:j + self.model.slide + 1]
-                for j in range(eps_len - self.model.slide)
-            ])  # (b,slide+1,c,h,w)
-            z = self.model.encoder_q(im_q, None)
-            softmax_z = torch.softmax(z / self.model.T, dim=1)
-            affordance_emb = self.model.skill_prior(
-                im_q[:, :self.model.stack_frames], None)
-            state_representation = self.model.encoder_q.get_state_representation(
-                im_q, None)
-            traj_representation = self.model.encoder_q.get_traj_representation(
-                state_representation)
-            # demo_skill_rep
-            traj_representation = repeat_last_proto(traj_representation,
-                                                    eps_len)
-            demo_skill_rep = traj_representation.detach().cpu().numpy()
-            # demo_proto
-            encode_protos = repeat_last_proto(z, eps_len)
-            demo_proto = encode_protos.detach().cpu().numpy()
-            # demo_softmax_proto
-            softmax_encode_protos = repeat_last_proto(softmax_z, eps_len)
-            demo_softmax_proto = softmax_encode_protos.detach().cpu().numpy()
-            # demo_emd
-            demo_emd = affordance_emb.detach().cpu().numpy()
+                # demo_proto
+                encode_protos = repeat_last_proto(z, eps_len)
+                demo_proto = encode_protos.detach().cpu().numpy()
+                # demo_softmax_proto
+                softmax_encode_protos = repeat_last_proto(softmax_z, eps_len)
+                demo_softmax_proto = softmax_encode_protos.detach().cpu().numpy()
+                # demo_emd
+                demo_emd = affordance_emb.detach().cpu().numpy()
 
         return demo_emd, demo_proto, demo_softmax_proto, demo_skill_rep
 
