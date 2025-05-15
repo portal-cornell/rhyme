@@ -37,43 +37,58 @@ Datasets can be found at: https://huggingface.co/datasets/prithwishdan/RHyME
    ```bash
    python scripts/skill_discovery.py
    ```
-   Example configs are provided:
+   <details>
+   <summary>Example configs</summary>
+      
    ```bash
    python scripts/skill_discovery.py --config-name=easy_pretrain_hf
    python scripts/skill_discovery.py --config-name=medium_pretrain_hf
    python scripts/skill_discovery.py --config-name=hard_pretrain_hf
    ```
-   Additional options include:
+   </details>
+   
+   <details>
+   <summary>Additional options</summary>
+
    ```bash
    Model.use_opt_loss (default=False)
    Model.use_tcc_loss (default=False)
    ```
-2. Convert images into latent vectors using pretrained visual encoder: 
+   </details>
+1. Convert images into latent vectors using pretrained visual encoder: 
    ```bash
    python scripts/label_sim_kitchen_dataset.py
    ```
-   Additional options include:
+   <details>
+   <summary>Additional options</summary>
+
    ```bash
    pretrain_model_name (Folder name of vision encoder in ./experiment/pretrain)
    ckpt (Checkpoint number)
    cross_embodiment (sphere-easy, sphere-medium, sphere-hard)
    ```
-3. Compute and store sequence-level distance metrics between cross embodiment play data and robot data:
+   </details>
+2. Compute and store sequence-level distance metrics between cross embodiment play data and robot data:
    ```
    python scripts/chopped_segment_wise_dists.py
    ``` 
-   Additional options include:
+   <details>
+   <summary>Additional options</summary>
+
    ```bash
    pretrain_model_name (Folder name of vision encoder in ./experiment/pretrain)
    ckpt (Checkpoint number) 
    num_chops (Number of clips to retrieve per robot video)
    cross_embodiment (sphere-easy, sphere-medium, sphere-hard)
    ```
-4. "Imagine" the paired demonstrator dataset, and store it in the datasets folder:
+   </details>
+3. "Imagine" the paired demonstrator dataset, and store it in the datasets folder:
    ```
    python scripts/reconstruction.py 
    ```
-   Additional options include:
+   <details>
+   <summary>Additional options</summary>
+
    ```bash
    pretrain_model_name (Folder name of vision encoder in ./experiment/pretrain)
    ckpt (Checkpoint number) 
@@ -82,21 +97,27 @@ Datasets can be found at: https://huggingface.co/datasets/prithwishdan/RHyME
    ot_lookup (default=True)
    tcc_lookup (default=False)
    ```
-5. Convert the imagined dataset into latent vectors:
+   </details>
+4. Convert the imagined dataset into latent vectors:
    ```
    python scripts/label_retrieved_dataset.py
    ```
-   Additional options include:
+   <details>
+   <summary>Additional options</summary>
+
    ```bash
    pretrain_model_name (Folder name of vision encoder in ./experiment/pretrain)
    ckpt (Checkpoint number) 
    imagined_dataset (Folder name of imagined dataset in ./datasets/kitchen_dataset)
    ```
-6. Train conditional diffusion policy to translate imagined demonstrator videos into robot actions:
+   </details>
+5. Train conditional diffusion policy to translate imagined demonstrator videos into robot actions:
    ```
    python scripts/skill_transfer_composing.py
    ```
-   Additional options include:
+   <details>
+   <summary>Additional options</summary>
+
    ```bash
    pretrain_model_name (Folder name of vision encoder in ./experiment/pretrain)
    pretrain_ckpt (Checkpoint number) 
@@ -105,6 +126,7 @@ Datasets can be found at: https://huggingface.co/datasets/prithwishdan/RHyME
    dataset.paired_data (True if using the imagined paired dataset)
    dataset.paired_percent (default=0.5, hybrid training on robot/imagined dataset)
    ```
+   </details>
 
 ## Evaluation
 
@@ -112,7 +134,9 @@ Datasets can be found at: https://huggingface.co/datasets/prithwishdan/RHyME
    ```
    python scripts/eval_checkpoint.py
    ```
-   Additional options include:
+   <details>
+   <summary>Additional options</summary>
+
    ```bash
    pretrain_model_name (Folder name of vision encoder in ./experiment/pretrain)
    pretrain_ckpt (Checkpoint number) 
