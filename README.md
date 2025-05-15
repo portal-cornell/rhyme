@@ -20,6 +20,8 @@ Follow these steps to install `RHyME`:
    conda activate rhyme
    pip install -e . 
    ```
+2. Before running any scripts, make sure to set "base_dev_dir" to your working directory for the codebase. You may directly write this value into the config files under ./config/simulation, 
+or alternatively override the argument in the command line when running scripts.
 
 ## Simulation Dataset
 
@@ -27,8 +29,7 @@ All datasets will be loaded in the code using HuggingFace API.
 
 Datasets can be found at: https://huggingface.co/datasets/prithwishdan/RHyME
 
-Before running any scripts, make sure to set "base_dev_dir" to your working directory for the codebase. You may directly write this value into the config files under ./config/simulation, 
-or alternatively override the argument in the command line when running scripts.
+
 
 ## Training
 
