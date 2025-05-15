@@ -1,0 +1,15 @@
+base_dev_dir: ''
+
+hydra:
+  run:
+    dir: '${base_dev_dir}/rhyme/experiment/label_sim_kitchen/${now:%Y-%m-%d_%H-%M-%S}'
+
+resize_shape: [124,124]
+data_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset
+pretrain_model_name: 'NO_PAIRING_TWOHANDS'
+exp_path: '${base_dev_dir}/rhyme/experiment/pretrain/${pretrain_model_name}'
+ckpt: 40
+imagined_dataset: ''
+device: 'cuda:0'
+plot_top_k: null
+verbose: True

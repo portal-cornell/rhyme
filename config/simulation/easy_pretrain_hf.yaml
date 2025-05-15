@@ -1,0 +1,136 @@
+base_dev_dir: ''
+exp_name: huggingface_no_pairing_EASY
+
+hydra:
+  run:
+    dir: '${base_dev_dir}/rhyme/experiment/pretrain/${exp_name}_${now:%Y-%m-%d_%H-%M-%S}'
+
+seed: 20
+batch_size: 28
+num_workers: 1
+pin_memory: false
+persistent_workers: true
+drop_last: true
+use_max_dataset: true
+unsupervised_training: true
+cross_embodiment: 'sphere-easy'
+resize_shape:
+- 124
+- 124
+max_get_threads: 24
+robot_dataset:
+  _target_: rhyme.dataset.dataset.EpisodeTrajDataset
+  dataset_name: prithwishdan/RHyME
+  config_name: robot
+  split: train
+  frame_sampler:
+    _target_: rhyme.dataset.frame_samplers.UniformDownSampleSampler
+    offset: 0
+    num_frames: 100
+    downsample_ratio: 1
+  slide: 8
+  resize_shape: ${resize_shape}
+  max_get_threads: ${max_get_threads}
+human_dataset:
+  _target_: rhyme.dataset.dataset.EpisodeTrajDataset
+  dataset_name: prithwishdan/RHyME
+  config_name: ${cross_embodiment}
+  split: train
+  frame_sampler:
+    _target_: rhyme.dataset.frame_samplers.UniformDownSampleSampler
+    offset: ${robot_dataset.frame_sampler.offset}
+    num_frames: ${robot_dataset.frame_sampler.num_frames}
+    downsample_ratio: ${robot_dataset.frame_sampler.downsample_ratio}
+  slide: ${robot_dataset.slide}
+  resize_shape: ${resize_shape}
+  max_get_threads: ${max_get_threads}
+paired_dataset:
+  _target_: rhyme.dataset.dataset.PairedRepDataset
+  dataset_name: prithwishdan/RHyME
+  config_name: ${cross_embodiment}+robot
+  frame_sampler:
+    _target_: rhyme.dataset.frame_samplers.UniformDownSampleSampler
+    offset: ${robot_dataset.frame_sampler.offset}
+    num_frames: 30
+    downsample_ratio: ${robot_dataset.frame_sampler.downsample_ratio}
+  resize_shape: ${resize_shape}
+  max_get_threads: ${max_get_threads}
+  percentage_pairing: 1
+augmentations:
+- random_crop_112_112
+- color_jitter
+- grayscale
+- gaussian_blur
+- normalize
+Trainer:
+  accelerator: gpu
+  devices:
+  - 0
+  max_epochs: 39
+  enable_progress_bar: true
+  log_every_n_steps: 10
+n_layer: 8
+Model:
+  _target_: rhyme.model.core.Model
+  dim: 128
+  T: 0.1
+  clutser_T: ${Model.T}
+  epsilon: 0.03
+  stack_frames: 1
+  sinkhorn_iterations: 3
+  slide: ${robot_dataset.slide}
+  freeze_prototypes_epoch: 0
+  n_negative_samples: 16
+  reverse_augment: false
+  time_augment: true
+  swav_loss_coef: 0.5
+  cluster_loss_coef: 1
+  lr: 0.0001
+  skill_prior_encoder: null
+  use_lr_scheduler: false
+  use_temperature_scheduler: false
+  positive_window: 4
+  negative_window: 12
+  use_tcc_loss: false
+  use_opt_loss: false
+  tcc_coef: 1
+  ot_coef: 1
+  unsupervised_training: ${unsupervised_training}
+  warmup_steps: 0
+  skill_prior:
+    _target_: rhyme.model.encoder.VisualMotionPrior
+    out_size: 128
+    vision_only: true
+    vision_encoder:
+      _target_: rhyme.model.encoder.CNN
+      out_size: ${Model.skill_prior.out_size}
+    nmb_prototypes: ${Model.dim}
+    normalize: false
+  encoder_q:
+    _target_: rhyme.model.encoder.VisualMotionEncoder
+    vision_only: true
+    state_size: 256
+    out_size: 256
+    vision_encoder:
+      _target_: rhyme.model.encoder.CNN
+      out_size: ${Model.encoder_q.state_size}
+    nmb_prototypes: ${Model.dim}
+    normalize: true
+    start_end: true
+    goal_condition: false
+    temporal_transformer_encoder:
+      _target_: rhyme.model.transformer.TorchTransformerEncoder
+      query_dim: ${Model.encoder_q.state_size}
+      heads: 4
+      dim_feedforward: 512
+      n_layer: ${n_layer}
+      rep_dim: ${Model.encoder_q.out_size}
+      use_encoder: false
+      input_dim: null
+      pos_encoder:
+        _target_: rhyme.model.transformer.PositionalEncoding
+        size: ${Model.encoder_q.state_size}
+        max_len: 10
+        frequency: 10
+callback:
+  every_n_epoch: 1

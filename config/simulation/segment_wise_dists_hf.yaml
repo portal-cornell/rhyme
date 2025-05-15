@@ -1,0 +1,22 @@
+base_dev_dir: ''
+
+resize_shape: [124,124]
+data_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset
+pretrain_model_name: 'NO_PAIRING_TWOHANDS'
+exp_path: '${base_dev_dir}/rhyme/experiment/pretrain/${pretrain_model_name}'
+
+ckpt: 40
+device: 'cuda:0'
+verbose: True
+
+frame_sampler:
+  _target_: rhyme.dataset.frame_samplers.UniformDownSampleSampler
+  offset: 0
+  num_frames: 30
+  downsample_ratio: 1
+
+num_chops: 4
+ot_lookup: True
+tcc_lookup: False
+
+cross_embodiment: sphere-medium
