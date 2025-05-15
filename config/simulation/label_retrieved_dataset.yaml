@@ -1,22 +1,15 @@
 base_dev_dir: '/share/portal/pd337'
 
+hydra:
+  run:
+    dir: '${base_dev_dir}/rhyme/experiment/label_sim_kitchen/${now:%Y-%m-%d_%H-%M-%S}'
+
 resize_shape: [124,124]
 data_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset
 pretrain_model_name: 'NO_PAIRING_TWOHANDS'
 exp_path: '${base_dev_dir}/rhyme/experiment/pretrain/${pretrain_model_name}'
-
 ckpt: 40
+imagined_dataset: ''
 device: 'cuda:0'
+plot_top_k: null
 verbose: True
-
-frame_sampler:
-  _target_: rhyme.dataset.frame_samplers.UniformDownSampleSampler
-  offset: 0
-  num_frames: 30
-  downsample_ratio: 1
-
-num_chops: 4
-ot_lookup: True
-tcc_lookup: False
-
-cross_embodiment: sphere-medium

@@ -1,7 +1,8 @@
 base_dev_dir: '/share/portal/pd337'
 hydra.job.config.save_dir: null
 
-pretrain_path: '${base_dev_dir}/rhyme/experiment/pretrain/none_simultaneous_new'
+pretrain_model_name: '...'
+pretrain_path: '${base_dev_dir}/rhyme/experiment/pretrain/${pretrain_model_name}'
 pretrain_ckpt: 79
 
 policy_name: 'FILL_IN'
@@ -41,7 +42,9 @@ upsample_proto: False
 dataset:
   _target_: rhyme.dataset.diffusion_bc_dataset.KitchenBCDataset
   resize_shape: ${bc_resize}
-  data_dirs: ['${base_dev_dir}/rhyme/datasets/kitchen_dataset/robot']
+  dataset_name: prithwishdan/RHyME
+  config_name: robot
+  split: train
   proto_dirs: ${pretrain_path}/encode_protos/ckpt_${pretrain_ckpt}
   pred_horizon: ${pred_horizon}
   obs_horizon: ${obs_horizon}
@@ -53,7 +56,6 @@ dataset:
   one_hot_prototype: ${one_hot_prototype}
   prototype_snap: True
   snap_frames: 100
-  mask: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/train_mask.json
   obs_image_based: True
   unnormal_list: ['proto_snap','protos']
   seed: ${seed}
@@ -108,8 +110,6 @@ eval_callback:
   task_progess_ratio: 1
   pretain_model_path: ${pretrain_path}
   pretrain_model_ckpt: ${pretrain_ckpt}
-  use_r3m: False
-  use_voltron: False
 
 
 eval_cfg:
@@ -122,7 +122,7 @@ eval_cfg:
   eval_mask_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/eval_mask.json
   demo_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/
   demo_item: 247
-  demo_type: 'none_simultaneous'
+  demo_type: ''
 
   max_steps: 275
   obs_horizon: ${obs_horizon}
@@ -132,3 +132,9 @@ eval_cfg:
   proto_horizon: ${proto_horizon}
   upsample_proto: ${upsample_proto}
   num_diffusion_iters: ${num_diffusion_iters}
+
+  use_huggingface: True
+  dataset_name: prithwishdan/RHyME
+  split: eval
+  use_huggingface_frames: True
+  

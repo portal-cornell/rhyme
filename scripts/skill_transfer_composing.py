@@ -18,7 +18,7 @@ from tqdm import tqdm
 @hydra.main(
     version_base=None,
     config_path="../config/simulation",
-    config_name="skill_transfer_composing",
+    config_name="skill_transfer_composing_hf",
 )
 def train_diffusion_bc(cfg: DictConfig):
     # create save dir

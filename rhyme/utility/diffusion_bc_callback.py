@@ -139,7 +139,6 @@ class visual_diffusion_bc_prediction_callback:
         if hasattr(eval_cfg, 'use_huggingface') and eval_cfg.use_huggingface:
             # Create cache key from dataset parameters
             cache_key = f"{eval_cfg.dataset_name}_{eval_cfg.demo_type}_{eval_cfg.split}"
-            
             # Try to get dataset from cache first
             if cache_key not in self.dataset_cache:
                 # Load dataset from Huggingface if not in cache

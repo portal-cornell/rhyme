@@ -751,11 +751,11 @@ class KitchenBCDataset(torch.utils.data.Dataset):
         
         return state_data
     
-    def load_proto_and_to_tensor(self, video_id, is_paired=False, is_lookup=False):
+    def load_proto_and_to_tensor(self, sample_idx, is_paired=False, is_lookup=False):
         """
         Keep the original implementation as prototypes still come from directories
         """
-        proto_path = osp.join(self.proto_dirs, str(video_id))
+        proto_path = osp.join(self.proto_dirs, str(sample_idx))
 
         def add_representation_suffix(path):
             if self.raw_representation:
@@ -779,15 +779,15 @@ class KitchenBCDataset(torch.utils.data.Dataset):
         if self.prototype_snap:
             cur_proto_data = proto_data
             if is_paired: # loads a human sequence of z's as well as the robot z_t
-                human_proto_path = osp.join(self.paired_proto_dirs, str(video_id))
+                human_proto_path = osp.join(self.paired_proto_dirs, str(sample_idx))
                 human_proto_path = add_representation_suffix(human_proto_path)
                 with open(human_proto_path, "r") as f:
                     human_proto_data = json.load(f)
                 human_proto_data = np.array(human_proto_data, dtype=np.float32) # (T,D)
-                cur_proto_data = human_proto_data                
+                cur_proto_data = human_proto_data            
 
             if is_lookup: # does nearest neighbor replacement on the robot sequence of z's
-                l2_dist_path = osp.join(self.nearest_neighbor_data_dirs, str(video_id))
+                l2_dist_path = osp.join(self.nearest_neighbor_data_dirs, str(sample_idx))
                 l2_dist_path = os.path.join(l2_dist_path, 'l2_dists.json')
                 with open(l2_dist_path, "r") as f:
                     l2_dist_data = json.load(f)
@@ -806,7 +806,7 @@ class KitchenBCDataset(torch.utils.data.Dataset):
                 cfg = DictConfig({'data_path': self.paired_demo_img_path, 'resize_shape': [124,124]})
                 reconstructed_video = []
                 orig_video = []
-                robot_vid_num = int(video_id)
+                robot_vid_num = int(sample_idx)
                 for k, (ep_num, frame_num) in enumerate(zip(episode_nums, frame_nums)):
                     human_proto_path = osp.join(self.paired_proto_dirs, str(ep_num))
                     human_proto_path = add_representation_suffix(human_proto_path)
@@ -931,13 +931,13 @@ class KitchenBCDataset(torch.utils.data.Dataset):
             # Load prototypes from directory based on video_id
             if self.prototype_snap:
                 proto_data, proto_snap = self.load_proto_and_to_tensor(
-                    video_id, 
+                    sample_idx, 
                     is_paired=(sample_idx in paired_set), 
                     is_lookup=(sample_idx in lookup_set)
                 )
                 train_data["proto_snap"].append(proto_snap)
             else:
-                proto_data = self.load_proto_and_to_tensor(video_id)
+                proto_data = self.load_proto_and_to_tensor(sample_idx)
 
             train_data["protos"].append(proto_data)
             train_data["actions"].append(self.load_action_and_to_tensor(sample_idx))
@@ -973,6 +973,8 @@ class KitchenBCDataset(torch.utils.data.Dataset):
             nsample["protos"] = nsample["protos"][-1:, :]
             # duplicate. only take one
             nsample["proto_snap"] = nsample["proto_snap"][-1:, :]
+            if nsample["proto_snap"].shape[0] == 0:
+                breakpoint()
         else:
             nsample["protos"] = nsample["protos"][: self.obs_horizon, :]
             nsample["protos"] = nsample["protos"][-self.proto_horizon :, :]

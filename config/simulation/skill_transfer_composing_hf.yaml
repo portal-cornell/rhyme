@@ -3,11 +3,6 @@ hydra.job.config.save_dir: null
 save_dir: '${base_dev_dir}/rhyme/experiment/diffusion_bc/kitchen/'
 policy_name: 'FILL'
 
-# IMPORTANT SETTINGS:
-#   unconditioned_policy - will train p(a|s)
-#   paired_data - will replace some robot trajectories with human trajectories
-#   nearest_neighbor_replacement - will do l2 distance lookups into bank of human zs to generate new trajectory
-
 project_name: 'kitchen_prototype_diffusion_bc'
 use_wandb: True
 num_epochs: 200
@@ -138,7 +133,7 @@ eval_callback:
 
 
 eval_cfg:
-  n_evaluations: 2
+  n_evaluations: 5
   eval_frequency: 20
   pretrain_path: ${pretrain_path}
   pretrain_ckpt: ${pretrain_ckpt}
@@ -148,7 +143,7 @@ eval_cfg:
   eval_mask_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/eval_mask.json
   demo_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/
   demo_item: 247
-  demo_type: 'sphere-medium'
+  demo_type: ''
 
   max_steps: 275
   obs_horizon: ${obs_horizon}
