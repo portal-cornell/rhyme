@@ -174,7 +174,7 @@ a) Train conditional diffusion policy to translate imagined demonstrator videos 
    eval_cfg.demo_type (Specifies which demonstrator to evaluate on)
    cross_embodiment (Folder name of imagined dataset in ./datasets/kitchen_dataset)
    dataset.paired_data (True if using the imagined paired dataset)
-   dataset.paired_percent (default=0.5, hybrid training on robot/imagined dataset)
+   dataset.paired_percent (default=0, hybrid training on robot/imagined dataset - set to 0.5 for RHyME)
    ```
    </details>
 <br>
