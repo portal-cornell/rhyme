@@ -105,7 +105,7 @@ Evaluate policy on unseen demonstrator videos:
    Key parameters:
    - `pretrain_model_name`: Folder name of vision encoder in ./experiment/pretrain
    - `pretrain_ckpt`: Checkpoint number 
-   - `demo_type_list`: Specifies which demonstrators to evaluate on
+   - `eval_cfg.demo_type`: Specifies which demonstrator to evaluate on
    - `policy_name`: Folder name of diffusion policy in ./experiment/diffusion_bc/kitchen
 
 ### BibTeX
