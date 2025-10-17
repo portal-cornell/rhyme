@@ -325,10 +325,6 @@ class visual_diffusion_bc_prediction_callback:
                 demo_emd = affordance_emb.detach().cpu().numpy()
         else:
             # Original implementation for loading from local files
-            if hasattr(eval_cfg, 'eval_mask_path') and eval_cfg.eval_mask_path:
-                eval_mask = load_json(eval_cfg.eval_mask_path)
-                assert eval_cfg.demo_item in np.arange(len(eval_mask))[eval_mask]
-                
             # load demo
             if self.task_progess_ratio is None:
                 if eval_cfg.demo_type == "human":

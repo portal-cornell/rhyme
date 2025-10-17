@@ -134,12 +134,8 @@ def main(cfg: DictConfig):
     file = open(os.path.join(cfg.trained_model_path, 'stats.pickle'), 'rb')
     stats = pickle.load(file)
 
-    with open(cfg.eval_cfg.eval_mask_path, "r") as f:
-        eval_mask = json.load(f)
-        eval_mask = np.array(eval_mask)
-    
-    eval_eps = np.arange(len(eval_mask))[eval_mask]
-
+    # Import dataset loader
+    from datasets import load_dataset
 
     result_dict = {
         'robot':{
@@ -160,21 +156,32 @@ def main(cfg: DictConfig):
         nets.load_state_dict(torch.load(os.path.join(cfg.trained_model_path, f'ckpt_{ckpt_num}.pt')))
         for demo_type in [human_type, 'robot']:
             cfg.eval_cfg.demo_type = demo_type
+            
+            # Load evaluation dataset from HuggingFace for this demo_type
+            eval_dataset = load_dataset(
+                cfg.eval_cfg.dataset_name,
+                demo_type,
+                split=cfg.eval_cfg.split
+            )
+            print(f"Loaded evaluation dataset for {demo_type} with {len(eval_dataset)} samples")
+            
+            # Get list of video IDs to evaluate
+            eval_eps = [item['video_id'] for item in eval_dataset]
             for speed in speeds[demo_type]:
                 task_list = ["slide cabinet", "light switch", "kettle", "microwave"]
                 eval_callback.task_progess_ratio = speed
                 tasks_completed = 0
                 all_correct_count = 0
                 num_unspecified_tasks = 0
-                for seed in eval_eps:
-                    cfg.eval_cfg.demo_item = seed.item()
+                for video_id in eval_eps:
+                    cfg.eval_cfg.demo_item = video_id
                     num_completed, _, initial_obs, final_obs = eval_callback.eval(
                         nets,
                         noise_scheduler,
                         stats,
                         cfg.eval_cfg,
                         save_dir,
-                        seed,
+                        video_id,
                         epoch_num=None,
                         task_list=task_list,
                         model_cfg=model_cfg

@@ -140,7 +140,6 @@ eval_cfg:
   bc_resize: ${bc_resize}
   pretrain_pipeline: ${pretrain_pipeline}
   resize_shape: ${pretrain_resize} # resize shape for pretrain
-  eval_mask_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/eval_mask.json
   demo_path: ${base_dev_dir}/rhyme/datasets/kitchen_dataset/
   demo_item: 247
   demo_type: ''
